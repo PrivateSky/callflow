@@ -33,19 +33,19 @@ It is just syntactic sugar on promises APIs but I'm a complexity hater and this 
             console.log(family); //whatever
         }).wait(family);
 
-##  Simple API:
+##  Simple functions (all added in Function.prototype for better syntax):
 
 ### wait(<list of variables>)
 
-    callback.wait(...)
+    functionReference.wait(...)
 
->   calls the callback when all promises are fulfilled. They become parameters for callback call.
+>   calls functionReference  when all promises are fulfilled. They become parameters for callback call.
 
 ### async(<list of variables>)
 
     functionReference.async(...)
 
-> creates a promise that get fulfilled when all the arguments are ready
+> Make an asynchronous call when possible , returns a promise that get fulfilled when all the arguments are fulfilled.
 
 ### nasync(<list of variables>)
 
@@ -55,13 +55,13 @@ It is just syntactic sugar on promises APIs but I'm a complexity hater and this 
 
 ### fail(<list of variables>)
 
-    callback.fail(...)
+    functionReference.fail(...)
 
-> call the function when a promise given as argument has failed. The callback will be called with an Error.
+> call the functionReference when a promise given as argument has failed. The callback will be called with an Error.
 
 ### timeout(timeout, <list of variables>)
 
-    callback.timeout(...)
+    functionReference.timeout(...)
 
 > like fail, but also get called if any promise given as arguments is unfulfilled until timeout expires. The callback will be called with an Error.
 > Do not use both fail and and timeout, they will be both called!
