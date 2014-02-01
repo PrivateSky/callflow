@@ -12,8 +12,8 @@ It is just syntactic sugar on promises's APIs but I'm a complexity hater and thi
 
 ## Example 2:
 
-> For example, we have 2 functions (asynchronous APIs for dealing with penguins)
-> The only convention is that successCallBack(returnedResult) will be called by these APIs on success and errorCallBack on fails
+> For example, we have 2 functions (asynchronous APIs for dealing with penguins), using node.js return convention
+
 
         loadPenguin(nickName, callBack)
         loadPenguinFamily(father, mother, callBack)
@@ -54,8 +54,8 @@ It is just syntactic sugar on promises's APIs but I'm a complexity hater and thi
 
 > call the function when a promise given as argument has failed
 
-### failUntil(timeout, <list of variables>)
+### timeout(timeout, <list of variables>)
 
     functionReference.fail(...)
 
-> like fail, but also get called if the promise is unfulfilled after timeout time
+> like fail, but also get called if any promise given as arguments is unfulfilled until timeout expires
