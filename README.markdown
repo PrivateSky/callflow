@@ -1,14 +1,14 @@
 Very small library that add the wait, async pattern to promises in Java Script (currently we are using Q library).
-It is just syntactic sugar on promises's APIs but I'm a complexity hater and this can clean your code.
+It is just syntactic sugar on promises APIs but I'm a complexity hater and this can clean your code.
 
 ## Example 1: reading the content of a file
 
         var myFileContent = fs.readFile.async("fileName.txt");
         (function(content){
             console.log(content);
-        }).wait(myfilecontent);
+        }).wait(myFileContent);
 
-        //myFileContent is a Q promise and you can do other things with this promise
+        //myFileContent is a Q promise and you can do other Q things with that promise
 
 ## Example 2:
 
@@ -32,9 +32,9 @@ It is just syntactic sugar on promises's APIs but I'm a complexity hater and thi
 
 ### wait(<list of variables>)
 
-    functionReference.wait(...)
+    callback.wait(...)
 
->   calls the function when all promises are fulfilled
+>   calls the callback when all promises are fulfilled. They become parameters for callback call.
 
 ### async(<list of variables>)
 
@@ -45,17 +45,19 @@ It is just syntactic sugar on promises's APIs but I'm a complexity hater and thi
 ### nasync(<list of variables>)
 
 > similar with async but ignores errors, fulfills the promise with a null value...
-> the programmer is testing for null himself, in many cases errors are normal and part of the logic (missing a key in cache, etc)
+> the programmer should test for null values (errors are normal part of the logic in many cases (missing a key in cache, etc))
 
 
 ### fail(<list of variables>)
 
-    functionReference.fail(...)
+    callback.fail(...)
 
-> call the function when a promise given as argument has failed
+> call the function when a promise given as argument has failed. The callback will be called with an Error.
 
 ### timeout(timeout, <list of variables>)
 
-    functionReference.fail(...)
+    callback.timeout(...)
 
-> like fail, but also get called if any promise given as arguments is unfulfilled until timeout expires
+> like fail, but also get called if any promise given as arguments is unfulfilled until timeout expires. The callback will be called with an Error.
+> Do not use both fail and and timeout, they will be both called!
+
