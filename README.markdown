@@ -3,7 +3,7 @@ It is just syntactic sugar on promises APIs but I'm a complexity hater and this 
 
 ## Installation:
 
-> npm install asynchron
+> npm install . //still beta, get from git
 
 
 ## Example 1: reading the content of a file
