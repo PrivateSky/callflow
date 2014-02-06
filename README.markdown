@@ -1,9 +1,9 @@
 Very small library that add the wait, async pattern to promises in Java Script (currently we are using Q library).
-It is just syntactic sugar on promises APIs but I'm a complexity hater and this can clean your code.
+It is just syntactic sugar on promises APIs but this can clean your code. 
 
 ## Installation:
 
-> npm install . //still beta, get from git
+> npm install asynchron
 
 
 ## Example 1: reading the content of a file
