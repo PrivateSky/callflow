@@ -41,11 +41,20 @@ It is just syntactic sugar on promises APIs but this can clean your code.
 
 >   calls functionReference  when all promises are fulfilled. They become parameters for callback call.
 
+### swait(<list of variables>)
+
+    functionReference.swait(...)
+
+>   same with wait but for use with SwarmUtil, swarmESB derived projects
+
+
 ### async(<list of variables>)
 
     functionReference.async(...)
 
 > Make an asynchronous call when possible , returns a promise that get fulfilled when all the arguments are fulfilled.
+
+
 
 ### nasync(<list of variables>)
 
