@@ -1,7 +1,7 @@
 {
   "name": "asynchron",
   "description": "Small library that adds wait, async pattern to promises. Use Q promises",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "https://github.com/salboaie/asynchron",
   "author": {
     "name": "Alboaie Sinica",
@@ -35,7 +35,7 @@
       "url": "http://www.gnu.org/licenses/lgpl.html"
     }
   ],
-  "_id": "asynchron@1.0.3",
+  "_id": "asynchron@1.0.4",
   "dependencies": {},
   "optionalDependencies": {},
   "_engineSupported": true,
