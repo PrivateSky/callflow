@@ -1,5 +1,7 @@
 Very small library that add the wait, async pattern to promises in Java Script (currently we are using Q library).
-It is just syntactic sugar on promises APIs but this can clean your code. 
+It is syntactic sugar on promises APIs to clean the code but it is also very important for swarm project (especially for SwarmCore)
+to help implementing proper multi-tenant, multi-user server side middleware. Asynchron is transparently keep track of the swarm
+context when executing asynchronous code (usage of swait). Asynchron can be also used outside of swarm projects.
 
 ## Installation:
 
