@@ -1,9 +1,9 @@
-var asynchron = require("asynchron");
+var asynchron = require("../lib/asynchron.js");
 
 
 function loadPenguin(nickName, callBack){
    //callBack(undefined, nickName);
-   callBack(new Error("No penguin"));
+   callBack(new Error("No penguin available"));
 }
 
 function loadPenguinFamily(father, mother, callBack){
@@ -17,9 +17,12 @@ var family = loadPenguinFamily.async(father, mother);
 
 (function (family){
     console.log(family);
-}).wait(family);
+}).wait(family, function(err){
+    console.log("We can pass or handle errors here!");
+    });
 
 
+/*
 (function (err){
     console.log("Failure ", err);
 }).fail(family);
@@ -28,3 +31,4 @@ var family = loadPenguinFamily.async(father, mother);
 (function (err){
     console.log("Timeout Failure", err);
 }).timeout(100,family);
+    */

@@ -47,7 +47,7 @@ context when executing asynchronous code (usage of swait). Asynchron can be also
 
     functionReference.swait(...)
 
->   same with wait but for use with SwarmUtil, swarmESB derived projects
+>   same with wait but has an additional call to preserve swarm phase environments. This functions should be used only with SwarmUtil, SwarmESB or SwarmCore derived projects.
 
 
 ### async(<list of variables>)
@@ -63,6 +63,13 @@ context when executing asynchronous code (usage of swait). Asynchron can be also
 > similar with async but ignores errors, fulfills the promise with a null value...
 > the programmer should test for null values (errors are normal part of the logic in many cases (missing a key in cache, etc))
 
+
+### error handling
+
+   wait, swait primitives can take a function as the last argument. On errors fulfilling the asynchronous calls, that function will be called.
+   The fail approach documented bellow is now marked obsolete as it is usually much easier to just pass a callback (eventually chain an inherited one) than to create a fail block
+
+#OBSOLETE functions, do not use, il will be removed in the next versions
 
 ### fail(<list of variables>)
 

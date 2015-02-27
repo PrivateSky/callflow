@@ -7,7 +7,7 @@ function loadPenguin(nickName, callBack){
 }
 
 function loadPenguinFamily(father, mother, callBack){
-    callBack(undefined, 'In harvest.family we got those cute penguin children objects');
+    callBack(undefined, 'Ue got a cute penguin family:' + father + " and " + mother);
 }
 
 var father = loadPenguin.async('MrPenguin');
@@ -16,10 +16,11 @@ var mother = loadPenguin.async('MrsPenguin');
 var family = loadPenguinFamily.async(father, mother);
 
 (function (family){
-    console.log(family);
+    console.log("Test success:", family);
 }).wait(family);
 
 
+/* obsolete APIS
 (function (err){
     console.log("Failure 1 ", err);
 }).fail(family);
@@ -28,3 +29,4 @@ var family = loadPenguinFamily.async(father, mother);
 (function (err){
     console.log("Failure 2", err);
 }).timeout(100,family);
+*/
