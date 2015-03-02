@@ -1,7 +1,9 @@
 Very small library that add the wait, async pattern to promises in Java Script (currently we are using Q library).
-It is syntactic sugar on promises APIs to clean the code but it is also very important for swarm project (especially for SwarmCore)
-to help implementing proper multi-tenant, multi-user server side middleware. Asynchron is transparently keep track of the swarm
-context when executing asynchronous code (usage of swait). Asynchron can be also used outside of swarm projects.
+
+    Asincrons p[rovides syntactic sugar on promises APIs to clean the code but it is also very important for swarm project (especially for SwarmCore)
+    It is mandatory to use asynchron module when working with swarm phases.
+By using swait, the swarm runtime can track execution contexts to handle security, multi-tenancy, handle errors properly,etc.
+ of coyrse, asynchron can be also used outside of swarm projects.
 
 ## Installation:
 
@@ -66,7 +68,7 @@ context when executing asynchronous code (usage of swait). Asynchron can be also
 
 ### error handling
 
-   wait, swait primitives can take a function as the last argument. On errors fulfilling the asynchronous calls, that function will be called.
+   wait, swait primitives can take a function as the last argument. On errors happening in any asynchronous call, that function will be called once.
    The fail approach documented bellow is now marked obsolete as it is usually much easier to just pass a callback (eventually chain an inherited one) than to create a fail block
 
 #OBSOLETE functions, do not use, il will be removed in the next versions
