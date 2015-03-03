@@ -1,7 +1,7 @@
 {
   "name": "asynchron",
   "description": "Small library that adds wait, async pattern to promises. Internally it adapts  Q promises but have very diffrent API outside. Created mainly for simplifying code within Swarm projects",
-  "version": "1.0.7,
+  "version": "1.0.7",
   "homepage": "https://github.com/salboaie/asynchron",
   "author": {
     "name": "Alboaie Sinica",
