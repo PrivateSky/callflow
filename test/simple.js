@@ -1,32 +1,30 @@
 var asynchron = require("asynchron");
 
+var assert = require('assert');
+
 
 function loadPenguin(nickName, callBack){
    callBack(undefined, nickName);
-    //callBack(true);
 }
 
-function loadPenguinFamily(father, mother, callBack){
-    callBack(undefined, 'Ue got a cute penguin family:' + father + " and " + mother);
-}
+describe('Async calls', function(){
 
-var father = loadPenguin.async('MrPenguin');
-var mother = loadPenguin.async('MrsPenguin');
+    function loadPenguinFamily(father, mother, callBack){
+        callBack(undefined, 'We got a cute penguin family:' + father + " and " + mother);
+    }
 
-var family = loadPenguinFamily.async(father, mother);
+    var father = loadPenguin.async('MrPenguin');
+    var mother = loadPenguin.async('MrsPenguin');
 
-(function (family){
-    console.log("Test success:", family);
-}).wait(family);
+    var family = loadPenguinFamily.async(father, mother);
+
+    it('Should wait for dependencies and load penguin family', function(done){
+        (function (family){
+            assert.equal(family, 'We got a cute penguin family:MrPenguin and MrsPenguin');
+            done();
+        }).wait(family);
+    });
+
+})
 
 
-/* obsolete APIS
-(function (err){
-    console.log("Failure 1 ", err);
-}).fail(family);
-
-
-(function (err){
-    console.log("Failure 2", err);
-}).timeout(100,family);
-*/
