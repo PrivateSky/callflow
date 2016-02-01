@@ -1,46 +1,69 @@
 var asynchron = require("../lib/asynchron.js");
 var flow = require("../lib/flow.js");
 
-function asyncReturnsTrue(value, callback){
+function asyncReturnsTrue(callback){
     setTimeout(function(){
         callback(null, true);
-    }, 100);
+    }, 1000);
 }
 
 //next, continue,
-//
 
 var f = flow.create("Flow example", {
-    begin:function(a1,a2, callback){
-        this.callback = callback;
+
+    begin:function(a1,a2){
+        console.log("Begin");
         if(a1<a2){
-            this.next("step1", "sadasdas", a1);
-            this.next(this.step2, "why", a2);
-        } else {
-            this.next("step2","why", a2);
-            this.next("step2","why", a2);
-            //this.step2.why("hhh")(a2);  //nope...
+            this.next("step1", "beginToStep1", a1);
+            this.next("step2", "beginToStep2", a2);
+            this.next("step1","test",a1);
+        }
+        else {
+            this.next("step2","beginToStep1", a2);
+            this.next("step1","beginToStep2", a1);
+            this.next("step1","test",a1);
         }
     },
 
     step1:function(a){
-        this.result = a;
-        this.next("end", "why");
-        this.next("end", "why2");
+        console.log("Step1 ");
+        this.step1 = a;
     },
 
     step2:function(a){
-        asyncReturnsTrue(a, this.continue("step3", "why"));
+        console.log("Step2 ");
+        asyncReturnsTrue(this.continue("step3", "step2ToStep3"));
+        this.step2 = a;
+        this.next("step4","step2ToStep4",a);
+
+        this.step4(a).why("step2ToStep4");
     },
-    step3:function(a){
-        asyncReturnsTrue(a, this.continue("end", "why"));
+
+    step3:function(a,b){
+        console.log("Step3");
+        this.step3 = b;
+    },
+    step4:function(a){
+        console.log("Step4")
+    },
+    step5:function(a){
+        console.log("Step5");
+    },
+    step6:function(){
+        console.log("Step6");
+    },
+    send:{
+        join:"step1,step2",
+        code:function(){
+            console.log("Send");
+            this.next("step5","sendToStep5");
+            asyncReturnsTrue(this.continue("step6","sendToStep6"));
+        }
     },
     end:{
-        join:'step1,step2',
+        join:'step1,step3,step4,step5,step6',
         code:function(){
-            if(b){
-                this.result = b;
-            }
+            console.log("end step2Arg:"+this.step2);
         }
     },
     error:function(error){
@@ -49,15 +72,4 @@ var f = flow.create("Flow example", {
         }
     }
 });
-
-
-//asyncReturnsTrue(function(){});
-
-var g = {
-    begin:function(){
-        asyncReturnsTrue(a, this.continue("end"));
-    },
-    end:function(){
-
-    }
-}
+f.begin("a1","a2");
