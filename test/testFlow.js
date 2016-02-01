@@ -36,7 +36,6 @@ var f = flow.create("Flow example", {
         this.step2 = a;
         this.next("step4","step2ToStep4",a);
 
-        this.step4(a).why("step2ToStep4");
     },
 
     step3:function(a,b){
