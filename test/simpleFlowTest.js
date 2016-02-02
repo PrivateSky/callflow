@@ -13,6 +13,8 @@ var f = flow.create("Flow example", {
     begin:function(a1,a2){
         console.log("Begin");
             this.next("step1", "beginToStep1", a1);
+            this.step1("asfsa", "beginToStep2");
+
             this.next("step2", "beginToStep2", a2);
     },
 

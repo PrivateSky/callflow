@@ -28,6 +28,7 @@ var f = flow.create("Flow example", {
     step2:function(a){
         console.log("Step2 ");
         asyncReturnsTrue(this.continue("step3", "step2ToStep3"));
+
         this.next("step4","step2ToStep4",a);
 
     },
