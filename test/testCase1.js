@@ -1,5 +1,5 @@
 var flow = require("../lib/flow.js");
-var assert       = require('double-check').assert;
+var assert       = require('semantic-firewall').assert;
 
 function asyncReturnsTrue(callback){
     setTimeout(function(){
@@ -9,7 +9,7 @@ function asyncReturnsTrue(callback){
 
 
 
-assert.callback("Simple flow example", function(end){
+assert.callback("testCase1", function(end){
     var logs = "";
     var expectedLogs = "begin" +
         "step1" +
