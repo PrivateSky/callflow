@@ -1,4 +1,3 @@
-var asynchron = require("../lib/asynchron.js");
 var flow = require("../lib/flow.js");
 
 function asyncReturnsTrue(callback){
