@@ -1,5 +1,5 @@
 
-var asynchron = require("../lib/asynchron.js");
+var asynchron = require("../../lib/asynchron.js");
 var assert = require("assert");
 
 
