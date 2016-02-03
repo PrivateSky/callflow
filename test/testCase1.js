@@ -4,7 +4,7 @@ var assert       = require('double-check').assert;
 function asyncReturnsTrue(callback){
     setTimeout(function(){
         callback(null, true);
-    }, 1000);
+    }, 10);
 }
 
 
