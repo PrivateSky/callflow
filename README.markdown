@@ -1,3 +1,70 @@
+#asynchron flows
+
+### This library purpose a concept of flow based on explicit continuations. 
+    
+    The idea of the library is to represent asynchronous code (or even synchronous but complex code) as a set pf phases in a workflow. 
+    The code using asynchron avoids the infamous pyramid of callbacks by structuring code in a list of functions (phases) that define jumbs between them.
+    Transitions between  phases can get triggered by directly calls to other phases, by asynchronous calls (next) and by a continuations given in place of a asynchronous callback.
+    The flows have also the concept of "join" that  are dormant phases that get called only when th whole list of declared phases got executed.
+        
+
+### Syntax: The sintax of a flow is a JSON with values as functions phases and join phases 
+
+    The flow can be seen as a set of phases and the computation will pass through each one (synchronously and asynchronously)
+    Each phase has a name. Phases can be function phases or join phases. If a phase is a function phase, the field value in the JSON is a function. 
+    If a phase is a join phase, the value of teh field is an object with a member "join" containing a list with the names of the phases that are waited until the join phase get called (see examples).   
+    
+
+### Basic example:
+    
+      vaf flow = require("asynchron");
+      var f = flow.createFlow("Flow example", {
+            begin:function(a1,a2){
+                //.. code
+                this.step();
+            },
+            step:function(a){
+                //.. code                
+            }
+        });
+        f();
+
+
+### Example with a join and use of continue:
+         
+      var f = flow.createFlow("Flow example", {
+            begin:function(a1,a2){
+                //..
+                this.step(true);
+                this.next("step", "Comment explaining why was this function called", true); // quite similar with this.step(true) but step wll be executed at nextTick   
+                
+                asyncFunction(this.continue("callback","Called later by asyncFunction");
+            },
+            step:function(a){
+                //a will be true in both cases
+                //..code
+                
+            }
+            callback:function(err,res){
+                            //..
+                
+            }
+            end:{
+                join:"step,callback", //waits 2 calls of step and one of callback
+                code:function(){
+                //..called     
+            }            
+        });
+        var flow = f();
+        f.status(); // see the flow status
+    
+
+###   Integration with the "whys" module
+
+###   Other tips and tricks
+ 
+
+# OBSOLETE DOCUMENTATION FOR async/wait pattern. Still working for old projects but These days, the recomened method in SwarmESB based projects of handlng asynchrnous code is with flows 
 Very small library that add the wait, async pattern to promises in Java Script (currently we are using Q library).
 
     Asincrons p[rovides syntactic sugar on promises APIs to clean the code but it is also very important for swarm project (especially for SwarmCore)
