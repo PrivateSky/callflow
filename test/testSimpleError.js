@@ -4,7 +4,7 @@ var assert       = require('double-check').assert;
 assert.callback("Simple test callback flow", function(end){
     var logs = "";
     var expectedLogs = "begin" +
-        "error";
+        "onError";
 
     function testResults(){
         assert.equal(logs,expectedLogs,"Difference between expected logs and actual results");
@@ -17,8 +17,7 @@ assert.callback("Simple test callback flow", function(end){
             this.failmethod();
         },
         error:function(error){
-            logs += "step";
-            assert.equal(error.text, "TypeError: Object #<Object> has no method 'failmethod'");
+            logs += "onError";
             testResults();
         }
     });

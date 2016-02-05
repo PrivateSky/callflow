@@ -63,7 +63,7 @@ assert.callback("testCase2",function(end) {
             }
         }
     });
-    f.begin("a1", "a2");
+    f("a1", "a2");
 });
 
 

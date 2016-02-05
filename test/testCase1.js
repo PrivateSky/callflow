@@ -57,12 +57,10 @@ assert.callback("testCase1", function(end){
             }
         },
         error:function(error){
-            if(b){
-                this.result = b;
-            }
+            console.log(error.stack);
         }
     });
-    f.begin("a1","a2");
+    f("a1","a2");
 
 })
 
