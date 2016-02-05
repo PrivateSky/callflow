@@ -1,4 +1,4 @@
-#asynchron flows
+#asynchron flows:  control your asynchronous code with explicit flows
 
 ### This library purpose a concept of flow based on explicit continuations. 
     

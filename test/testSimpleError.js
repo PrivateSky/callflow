@@ -14,7 +14,12 @@ assert.callback("Simple test callback flow", function(end){
     var f = flow.create("Flow example", {
         begin:function(a1,a2){
             logs+="begin";
-            this.failmethod();
+            try{
+                this.failmethod();
+            }
+            catch(e){
+                this.error(e);
+            }
         },
         error:function(error){
             logs += "onError";
