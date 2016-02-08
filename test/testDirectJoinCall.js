@@ -5,6 +5,8 @@ assert.callback("Simple test callback join", function(end){
     var logs = "";
     var expectedLogs = "begin" +
         "step1" +
+        "send" +
+        "send" +
         "step2" +
         "end";
 
@@ -17,24 +19,31 @@ assert.callback("Simple test callback join", function(end){
         begin:function(a1,a2){
             logs+="begin";
             this.step1();
+            this.send();
             this.step2();
         },
         step1:function(a){
             logs += "step1";
-
         },
         step2:function(a){
             logs += "step2";
         },
+        send:{
+            join:'step1',
+            code:function(){
+                logs+="send";
+            }
+        },
         end:{
             join:"step1,step2",
-            code:function(a){
+            code:function(){
                 logs += "end";
                 testResults();
+
             }
         }
     });
-    var fl = f();
+    f();
 })
 
 
