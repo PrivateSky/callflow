@@ -1,6 +1,11 @@
 var flow = require("../lib/flow.js");
 var assert       = require('double-check').assert;
 
+function createDefaultMotivation(){
+
+}
+
+
 assert.callback("Simple test callback join", function(end){
     var logs = "";
     var expectedLogs = "begin" +

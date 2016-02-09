@@ -29,18 +29,18 @@ assert.callback("testCase1", function(end){
 
         begin:function(a1,a2){
             logs+="begin";
-            asyncReturnsTrue(this.continue("step3", "step2ToStep3"));
+            asyncReturnsTrue(this.continue("step3"));
             this.step1();
         },
 
         step1:function(a){
             logs += "step1";
-            this.next("step2","becauseStep2");
+            this.next("step2");
         },
         step2:function(a){
             logs += "step2";
-            asyncReturnsTrue(this.continue("step3", "step2ToStep3"));
-            asyncReturnsTrue(this.continue("step4", "step2ToStep3"));
+            asyncReturnsTrue(this.continue("step3"));
+            asyncReturnsTrue(this.continue("step4"));
         },
 
         step3:function(a,b){

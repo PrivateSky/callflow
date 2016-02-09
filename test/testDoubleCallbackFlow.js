@@ -24,8 +24,8 @@ assert.callback("Simple test callback flow", function(end){
     var f = flow.create("Flow example", {
         begin:function(a1,a2){
             logs+="begin";
-            asyncReturnsTrue(this.continue("callback", "call calback"));
-            asyncReturnsTrue(this.continue("callback", "call calback"));
+            asyncReturnsTrue(this.continue("callback"));
+            asyncReturnsTrue(this.continue("callback"));
         },
         callback:function(a){
             logs += "callback";

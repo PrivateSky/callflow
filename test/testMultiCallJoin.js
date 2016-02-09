@@ -14,7 +14,8 @@ assert.callback("Simple test callback flow", function(end){
     var expectedLogs = "begin" +
         "callback" +
         "callback" +
-        "callback" ;
+        "callback" +
+        "end";
 
     function testResults(){
         assert.equal(logs,expectedLogs);
@@ -25,7 +26,7 @@ assert.callback("Simple test callback flow", function(end){
         begin:function(a1,a2){
             logs+="begin";
             for(var i=0;i<3;i++){
-                asyncReturnsTrue(this.continue("callback", "call calback"));
+                asyncReturnsTrue(this.continue("callback"));
             }
         },
         callback:function(a){
@@ -35,6 +36,7 @@ assert.callback("Simple test callback flow", function(end){
         end:{
             join:"callback",
             code:function(){
+                logs+="end";
                 testResults();
             }
         }
