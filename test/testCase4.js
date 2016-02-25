@@ -24,7 +24,7 @@ assert.callback("testCase4",function(end) {
         "end";
 
     function testResults() {
-        assert.equal(logs, expectedLogs, "problemsAtNextCalls");
+        assert.equal(logs, expectedLogs);
         end();
     }
 
