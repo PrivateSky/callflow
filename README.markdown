@@ -22,7 +22,7 @@
     
 ### Basic example:
     
-      vaf flow = require("callflow");
+      var flow = require("callflow");
       var f = flow.createFlow("Flow example", {
             begin:function(a1,a2){
                 //.. code
@@ -73,7 +73,7 @@
  Beside automated integration, why calls can be performed at will anywhere and the why system will compact the tracking logs for each call.
  "next" and "continue" functions have the second argument an string that is automatically passed to the why.
  
-      vaf flow = require("callflow");
+      var flow = require("callflow");
            var f = flow.createFlow("Flow example", {
                  begin:function(a1,a2){
                      //.. code
