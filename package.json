@@ -1,8 +1,8 @@
 {
   "name": "callflow",
   "description": "Control your asynchronous code with explicit flows! Created mainly for simplifying code within SwarmESB projects but can be used outside SwarmESB ecosystem",
-  "version": "0.5.2",
-  "_id": "callflow@0.5.2",
+  "version": "0.5.3",
+  "_id": "callflow@0.5.3",
   "homepage": "https://github.com/salboaie/asynchron",
   "author": {
     "name": "Alboaie Sinica",
