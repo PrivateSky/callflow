@@ -58,9 +58,7 @@ assert.callback("testCase2",function(end) {
             }
         },
         error: function (error) {
-            if (b) {
-                this.result = b;
-            }
+            console.error(error);
         }
     });
     f("a1", "a2");
