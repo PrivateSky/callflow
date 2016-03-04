@@ -61,7 +61,6 @@ assert.callback("testCase1", function(end){
         }
     });
     f("a1","a2");
-
 })
 
 
