@@ -22,7 +22,6 @@ assert.callback("Simple test callback flow", function(end){
         }
     });
     f();
-
 })
 
 

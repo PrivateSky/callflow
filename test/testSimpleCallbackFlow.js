@@ -9,7 +9,7 @@ function asyncReturnsTrue(callback){
 
 
 
-assert.callback("Simple test callback flow", function(end){
+assert.callback("Test simple callback call", function(end){
     var logs = "";
     var expectedLogs = "begin" +
         "callback";

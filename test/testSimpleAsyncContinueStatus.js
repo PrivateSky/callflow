@@ -8,16 +8,14 @@ function asyncReturnsTrue(callback){
     }, 10);
 }
 
-assert.callback("Simple async status test", function(end){
+assert.callback("Test statuses", function(end){
     var logs = "";
     var expectedLogs = "begin" +
-        "step1" +
-        "step2" +
-        "step3" +
+        "step" +
+        "step"+
         "end";
 
     var expectedStatuses = "created"+
-            "running"+
             "running"+
             "running"+
             "running"+
@@ -28,34 +26,25 @@ assert.callback("Simple async status test", function(end){
     function testResults(){
         assert.equal(logs,expectedLogs,"Difference between expected logs and actual results");
         setTimeout(function(){
-            statuses+=fl.getStatus();
+            statuses+=x.getStatus();
             assert.equal(statuses,expectedStatuses,"Difference between expected statuses and actual statuses");
             end();
         },10)
     }
 
-    var f = flow.create("Flow example", {
-        begin:function(a1,a2){
+    var f = flow.create("Test statuses", {
+        begin:function(){
             logs+="begin";
             statuses+=this.getStatus();
-            this.step1("step1");
-            this.step2();
+            this.step();
+            asyncReturnsTrue(this.continue("step"));
         },
-        step1:function(a){
+        step:function(){
             statuses+=this.getStatus();
-            logs += "step1";
-        },
-        step2:function(a){
-            statuses+=this.getStatus();
-            logs += "step2";
-            asyncReturnsTrue(this.continue("step3",'a'));
-        },
-        step3:function(a){
-            statuses+=this.getStatus();
-            logs+="step3";
+            logs += "step";
         },
         end:{
-            join:"step1,step3",
+            join:"step",
             code:function(a){
                 statuses+=this.getStatus();
                 logs += "end";
@@ -64,7 +53,7 @@ assert.callback("Simple async status test", function(end){
         }
     });
     statuses+= "created";
-    var fl = f();
+    var x = f();
 })
 
 

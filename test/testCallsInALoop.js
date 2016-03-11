@@ -9,7 +9,7 @@ function asyncReturnsTrue(callback){
 
 
 
-assert.callback("Simple test callback flow", function(end){
+assert.callback("Test calls in a loop", function(end){
     var logs = "";
     var expectedLogs = "begin" +
         "callback" +
@@ -26,7 +26,7 @@ assert.callback("Simple test callback flow", function(end){
         begin:function(a1,a2){
             logs+="begin";
             for(var i=0;i<3;i++){
-                asyncReturnsTrue(this.continue("callback"));
+                this.callback(undefined);
             }
         },
         callback:function(a){
