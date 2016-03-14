@@ -6,6 +6,7 @@ process.env['RUN_WITH_WHYS'] = true;
 assert.callback("Simple flow-why test", function(end){
     var logs = "";
     var expectedLogs = "begin" +
+        "step"+
         "step";
 
     function testResults(context){
@@ -14,18 +15,25 @@ assert.callback("Simple flow-why test", function(end){
         assert.equal(logs,expectedLogs,"Difference between expected logs and actual results");
         assert.equal(executionSummary.calls.hasOwnProperty('***Starting flow: Flow'),true,"The execution summary does not provide the starting point");
         assert.equal(executionSummary.calls['***Starting flow: Flow'].calls.hasOwnProperty('begin to step'),true,"The execution summary does not contain call: begin to step");
+        assert.equal(executionSummary.calls['***Starting flow: Flow'].calls.hasOwnProperty('Running step'),true,"The execution summary does not contain call: begin to step");
+
         end();
     }
 
     var f = flow.create("Flow", {
         begin:function(a1,a2){
             logs+="begin";
-            this.step.why("Because")();
+            this.step();
+            this.step.why("Running step")();
+
+            var context = why.getGlobalCurrentContext();
+            setTimeout(function(){testResults(context)},10);
         },
         step:function(a){
             logs += "step";
-            var context = why.getGlobalCurrentContext();
-            setTimeout(function(){testResults(context)},10);
+        },
+        step2:function(){
+
         }
     });
     f();
