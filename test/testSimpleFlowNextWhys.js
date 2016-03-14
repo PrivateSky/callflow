@@ -3,7 +3,7 @@ var assert       = require('double-check').assert;
 var why = require("../../whys/lib/why.js");
 
 process.env['RUN_WITH_WHYS'] = true;
-assert.callback("Simple flow-why test", function(end){
+assert.callback("Simple flow with next test", function(end){
     var logs = "";
     var expectedLogs = "begin" +
         "step";

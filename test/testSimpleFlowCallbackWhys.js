@@ -4,13 +4,13 @@ var why = require("../../whys/lib/why.js");
 
 
 process.env['RUN_WITH_WHYS'] = true;
-assert.callback("Simple flow-why test", function(end){
+process.env['HIDE_WHY_EXECUTION'] = true;
+assert.callback("Simple flow with callback test", function(end){
     var logs = "";
     var expectedLogs = "begin" +
         "step";
 
     function testResults(context){
-        console.log(JSON.stringify(context.getExecutionSummary(),null,4));
         var executionSummary = context.getExecutionSummary();
         assert.equal(logs,expectedLogs,"Difference between expected logs and actual results");
         assert.equal(executionSummary.calls.hasOwnProperty('***Starting flow: Flow'),true,"The execution summary does not provide the starting point");
