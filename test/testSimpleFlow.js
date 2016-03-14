@@ -4,7 +4,7 @@ var assert       = require('double-check').assert;
 assert.callback("Simple test callback flow", function(end){
     var logs = "";
     var expectedLogs = "begin" +
-        "step";
+                       "step";
 
     function testResults(){
         assert.equal(logs,expectedLogs,"Difference between expected logs and actual results");
@@ -12,7 +12,7 @@ assert.callback("Simple test callback flow", function(end){
     }
 
     var f = flow.create("Flow example", {
-        begin:function(a1,a2){
+        begin:function(a1){
             logs+="begin";
             this.step();
         },
@@ -21,8 +21,7 @@ assert.callback("Simple test callback flow", function(end){
             testResults();
         }
     });
-    f();
-
+    f("someArgs");
 })
 
 

@@ -20,7 +20,7 @@ assert.callback("Simple flow-why test", function(end){
     var f = flow.create("Flow", {
         begin:function(a1,a2){
             logs+="begin";
-            this.step();
+            this.step.why("Because")();
         },
         step:function(a){
             logs += "step";
