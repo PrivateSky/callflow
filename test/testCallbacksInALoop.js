@@ -7,8 +7,6 @@ function asyncReturnsTrue(callback){
     }, 10);
 }
 
-
-
 assert.callback("Test call callbacks in a loop", function(end){
     var logs = "";
     var expectedLogs = "begin" +

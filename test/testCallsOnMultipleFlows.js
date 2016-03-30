@@ -16,15 +16,12 @@ assert.callback("Test calls on different flows", function(end){
 
    var composeFlow1 = flow.create("FLOW 1", {
            begin:function(expected){
-               this.logs="";
-               this.expected = expected;
                this.logs = "FLOW1";
                this.step("FLOW1");
                this.next("step",undefined,"FLOW1")
 
            },
            step:function(a){
-
                this.logs +=a
            },
            end:{
@@ -39,8 +36,6 @@ assert.callback("Test calls on different flows", function(end){
    var composeFlow2 = flow.create("FLOW 2", {
 
        begin:function(expected){
-           this.expected = expected;
-           this.logs = "";
            this.logs = "FLOW2";
            this.step("FLOW2");
 
@@ -58,8 +53,8 @@ assert.callback("Test calls on different flows", function(end){
     });
 
 
-   composeFlow1(expected1);//FLOW 1
-   composeFlow2(expected2); //FLOW 2
+   composeFlow1();
+   composeFlow2();
 
 })
 
