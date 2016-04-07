@@ -8,7 +8,7 @@ function asyncReturnsTrue(callback){
 }
 
 
-
+process.env['RUN_WITH_WHYS'] = true;
 assert.callback("Test calls in a loop", function(end){
     var logs = "";
     var expectedLogs = "begin" +
@@ -18,7 +18,7 @@ assert.callback("Test calls in a loop", function(end){
         "end";
 
     function testResults(){
-        assert.equal(logs,expectedLogs);
+        assert.equal(logs,expectedLogs,"something went wrong");
         end();
     }
 
@@ -26,7 +26,7 @@ assert.callback("Test calls in a loop", function(end){
         begin:function(a1,a2){
             logs+="begin";
             for(var i=0;i<3;i++){
-                this.callback(undefined);
+                this.callback.why("callback"+i)(undefined);
             }
         },
         callback:function(a){

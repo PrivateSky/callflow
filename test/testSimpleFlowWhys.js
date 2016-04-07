@@ -10,7 +10,6 @@ assert.callback("Simple flow-why test", function(end){
         "step";
 
     function testResults(context){
-        console.log(JSON.stringify(context.getExecutionSummary(),null,4));
         var executionSummary = context.getExecutionSummary();
         assert.equal(logs,expectedLogs,"Difference between expected logs and actual results");
         assert.equal(executionSummary.hasOwnProperty('***Starting flow: Flow'),true,"The execution summary does not provide the starting point");
@@ -21,13 +20,10 @@ assert.callback("Simple flow-why test", function(end){
     }
 
     var f = flow.create("Flow", {
-        begin:function(a1,a2){
+        begin:function(){
             logs+="begin";
             this.step();
             this.step.why("Running step")();
-
-            var context = why.getGlobalCurrentContext();
-            setTimeout(function(){testResults(context)},10);
         },
         step:function(a){
             logs += "step";
@@ -37,6 +33,7 @@ assert.callback("Simple flow-why test", function(end){
         }
     });
     f();
+    setTimeout(function(){testResults(why.getGlobalCurrentContext())},10);
 })
 
 

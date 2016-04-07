@@ -1,6 +1,5 @@
 var flow = require("../lib/flow.js");
 var assert       = require('double-check').assert;
-
 assert.callback("Simple test callback flow", function(end){
     var logs = "";
     var expectedLogs = "begin" +
