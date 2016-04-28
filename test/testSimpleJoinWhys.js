@@ -10,7 +10,6 @@ assert.callback("Simple flow with join and why test", function(end){
         "step";
 
     function testResults(context){
-        console.log(JSON.stringify(context.getExecutionSummary(),null,4));
         var executionSummary = context.getExecutionSummary();
         assert.equal(logs,expectedLogs,"Difference between expected logs and actual results");
         assert.equal(executionSummary.hasOwnProperty('***Starting flow: Flow'),true,"The execution summary does not provide the starting point");
