@@ -5,7 +5,7 @@ function createDefaultMotivation(){
 
 }
 
-process.env['RUN_WITH_WHYS'] = true;
+//process.env['RUN_WITH_WHYS'] = true;
 assert.callback("Simple test callback join", function(end){
     var logs = "";
     var expectedLogs = "begin" +
@@ -23,6 +23,7 @@ assert.callback("Simple test callback join", function(end){
             logs+="begin";
             this.step1();
             this.step2();
+
         },
         step1:function(a){
             logs += "step1";
