@@ -1,6 +1,7 @@
 
 var flow = require("../lib/flow");
 var assert  = require('double-check').assert;
+process.env['RUN_WITH_WHYS'] = true;
 assert.callback("Test calls on different flows", function(end){
     var expected1 = "FLOW1FLOW1FLOW1end";
     var expected2 = "FLOW2FLOW2end";

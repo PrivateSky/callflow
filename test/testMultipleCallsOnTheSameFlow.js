@@ -1,7 +1,6 @@
 
 var flow = require("../lib/flow");
 var assert       = require('double-check').assert;
-
 assert.callback("Test multiple calls on the same flow", function(end){
     var expected1 = "FLOW1FLOW1FLOW1end";
 
@@ -12,8 +11,7 @@ assert.callback("Test multiple calls on the same flow", function(end){
             end();
         }
     }
-
-    var fl = flow.create("FLOW 1", {
+    var f = {
         begin:function(expected,start){
             this.logs=start;
             this.expected = start+expected;
@@ -31,11 +29,12 @@ assert.callback("Test multiple calls on the same flow", function(end){
                 testResults(this.logs,expected1);
             }
         }
-    });
+    }
+    var f1 = flow.create("FLOW 1", f);
+    var f2 = flow.create("FLOW 2",f);
 
-
-    fl(expected1,"first");
-    fl(expected1,"second");
+    f1(expected1,"first");
+    f2(expected1,"second");
 
 })
 

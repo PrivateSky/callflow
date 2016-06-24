@@ -1,6 +1,8 @@
 var flow = require("../lib/flow.js");
 var assert       = require('double-check').assert;
 
+process.env['RUN_WITH_WHYS'] = true;
+
 assert.callback("Simple async status test", function(end){
     var logs = "";
     var expectedLogs = "begin" +
