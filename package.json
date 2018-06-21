@@ -1,8 +1,8 @@
 {
   "name": "callflow",
   "description": "Control your asynchronous code with explicit flows! Created mainly for simplifying code within SwarmESB/PrivateSky projects but can be used outside SwarmESB ecosystem",
-  "version": "0.7.0",
-  "_id": "callflow@0.7.0",
+  "version": "0.9.0",
+  "_id": "callflow@0.9.0",
   "homepage": "https://github.com/salboaie/callflow",
   "author": {
     "name": "Alboaie Sinica",
@@ -25,7 +25,7 @@
   "directories": {
     "lib": "./lib"
   },
-  "main": "./lib/index.js",
+  "main": "index.js",
   "licenses": [
     {
       "type": "LGPL",
@@ -33,6 +33,5 @@
     }
   ],
   "dependencies": {
-    "whys": "git+https://github.com/PrivateSky/whys.git"
   }
 }
