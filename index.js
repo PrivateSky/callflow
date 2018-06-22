@@ -1,3 +1,8 @@
+function defaultErrorHandlingImplementation(err, res){
+	//console.log(err.stack);
+	if(err) throw err;
+	return res;
+}
 
 $$ = {
     errorHandler: {
@@ -58,6 +63,8 @@ $$ = {
         }
     }
 };
+
+$$.defaultErrorHandlingImplementation = defaultErrorHandlingImplementation;
 
 $$.callflows        = require("./lib/swarmDescription").createSwarmEngine("callflow");
 $$.callflow         = $$.callflows;
