@@ -83,8 +83,6 @@ $$.swarm            = $$.swarms;
 $$.contracts        = callflowModule.createSwarmEngine("contract", utils);
 $$.contract         = $$.contracts;
 
-$$.PSK_PubSub = require("./lib/soundPubSub");
-
 var loadedModules = {};
 
 
@@ -109,6 +107,9 @@ $$.requireModule = function(name){
     }
     return existingModule;
 };
+
+
+$$.PSK_PubSub = $$.requireModule("soundpubsub").soundPubSub;
 
 $$.securityContext = "system";
 $$.libraryPrefix = "global";
