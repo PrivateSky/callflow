@@ -7,7 +7,7 @@ function defaultErrorHandlingImplementation(err, res){
 	return res;
 }
 
-$$ = {
+global.$$ = {
     errorHandler: {
         error:function(err, args, msg){
             console.log(err, "Unknown error from function call with arguments:", args, "Message:", msg);
@@ -70,6 +70,8 @@ $$ = {
     }
 };
 
+var swarmUtils = require("./lib/choreographies/utilityFunctions/swarm");
+
 $$.defaultErrorHandlingImplementation = defaultErrorHandlingImplementation;
 
 var callflowModule = require("./lib/swarmDescription");
@@ -78,9 +80,9 @@ $$.callflow         = $$.callflows;
 $$.flow             = $$.callflows;
 $$.flows            = $$.callflows;
 
-$$.swarms           = callflowModule.createSwarmEngine("swarm", utils);
+$$.swarms           = callflowModule.createSwarmEngine("swarm", swarmUtils);
 $$.swarm            = $$.swarms;
-$$.contracts        = callflowModule.createSwarmEngine("contract", utils);
+$$.contracts        = callflowModule.createSwarmEngine("contract", swarmUtils);
 $$.contract         = $$.contracts;
 
 var loadedModules = {};
@@ -108,7 +110,6 @@ $$.requireModule = function(name){
     return existingModule;
 };
 
-
 $$.PSK_PubSub = $$.requireModule("soundpubsub").soundPubSub;
 
 $$.securityContext = "system";
@@ -134,9 +135,6 @@ $$.registerSwarmDescription =  function(libraryName,shortName, description){
     }
     $$.libraries[libraryName][shortName] = description;
 }
-
-var utils = require("./lib/choreographies/utilityFunctions");
-
 
 module.exports = {
     				createSwarmEngine: require("./lib/swarmDescription").createSwarmEngine,
