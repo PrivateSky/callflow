@@ -141,5 +141,6 @@ module.exports = {
                     createJoinPoint: require("./lib/parallelJoinPoint").createJoinPoint,
                     createSerialJoinPoint: require("./lib/serialJoinPoint").createSerialJoinPoint,
 					"safe-uuid": require("./lib/safe-uuid"),
-					beesHealer: require("./lib/beesHealer")
+					beesHealer: require("./lib/beesHealer"),
+                    swarmInstanceManager: require("./lib/choreographies/swarmInstancesManager")
 				};
