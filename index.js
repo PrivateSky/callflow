@@ -70,6 +70,26 @@ global.$$ = {
     }
 };
 
+/*
+ requireModule and requireLibrary are overwriting the node.js defaults in loading modules for increasing security and speed.
+ We guarantee that each module or library is loaded only once and only from a single folder... Use the standard require if you need something else!
+
+ By default we expect to run from a privatesky VM engine ( a privatesky node) and therefore the callflow stays in the modules folder there.
+ Any new use of callflow (and requireModule or requireLibrary) could require changes to $$.__global.__loadLibrayRoot and $$.__global.__loadModulesRoot
+ */
+$$.__global.__loadLibraryRoot    = __dirname + "/../../libraries/";
+$$.__global.__loadModulesRoot   = __dirname + "/../../modules/";
+var loadedModules = {};
+$$.requireModule = function(name){
+	var existingModule = loadedModules[name];
+	if(!existingModule){
+		var absolutePath = path.resolve( $$.__global.__loadModulesRoot + name);
+		existingModule = require(absolutePath);
+		loadedModules[name] = existingModule;
+	}
+	return existingModule;
+};
+
 var swarmUtils = require("./lib/choreographies/utilityFunctions/swarm");
 
 $$.defaultErrorHandlingImplementation = defaultErrorHandlingImplementation;
@@ -85,30 +105,10 @@ $$.swarm            = $$.swarms;
 $$.contracts        = callflowModule.createSwarmEngine("contract", swarmUtils);
 $$.contract         = $$.contracts;
 
-var loadedModules = {};
-
-
-/*
-    requireModule and requireLibrary are overwriting the node.js defaults in loading modules for increasing security and speed.
-    We guarantee that each module or library is loaded only once and only from a single folder... Use the standard require if you need something else!
-
-    By default we expect to run from a privatesky VM engine ( a privatesky node) and therefore the callflow stays in the modules folder there.
-    Any new use of callflow (and requireModule or requireLibrary) could require changes to $$.__global.__loadLibrayRoot and $$.__global.__loadModulesRoot
- */
-$$.__global.__loadLibraryRoot    = __dirname + "/../../libraries/";
-$$.__global.__loadModulesRoot   = __dirname + "/../../modules/";
 
 
 
-$$.requireModule = function(name){
-    var existingModule = loadedModules[name];
-    if(!existingModule){
-        var absolutePath = path.resolve( $$.__global.__loadModulesRoot + name);
-        existingModule = require(absolutePath);
-        loadedModules[name] = existingModule;
-    }
-    return existingModule;
-};
+
 
 $$.PSK_PubSub = $$.requireModule("soundpubsub").soundPubSub;
 
@@ -141,6 +141,5 @@ module.exports = {
                     createJoinPoint: require("./lib/parallelJoinPoint").createJoinPoint,
                     createSerialJoinPoint: require("./lib/serialJoinPoint").createSerialJoinPoint,
 					"safe-uuid": require("./lib/safe-uuid"),
-					beesHealer: require("./lib/beesHealer"),
                     swarmInstanceManager: require("./lib/choreographies/swarmInstancesManager")
 				};
