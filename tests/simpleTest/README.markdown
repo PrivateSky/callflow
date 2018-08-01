@@ -7,7 +7,9 @@
 In order to be able to use callflow in browsers some "require()" calls are bundled in on single file that can be loaded usig `<script>` tag.
 
 ##Prerequisites
+
 Make sure you already have installed globally `git` and node modules `browsify`, `http-server`.
+
 `npm install -g browsify`
 `npm install -g http-server`
 
