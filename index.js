@@ -7,8 +7,12 @@ function defaultErrorHandlingImplementation(err, res){
 	return res;
 }
 
-global.$$ = {
-    errorHandler: {
+
+if(typeof(global.$$) == "undefined") {
+    global.$$ = {};
+}
+
+$$.errorHandler = {
         error:function(err, args, msg){
             console.log(err, "Unknown error from function call with arguments:", args, "Message:", msg);
         },
@@ -47,16 +51,19 @@ global.$$ = {
         warning:function(msg){
             console.log(msg);
         }
-    },
-    uidGenerator: require("./lib/safe-uuid"),
-    safeErrorHandling:function(callback){
+    };
+
+$$.uidGenerator = require("./lib/safe-uuid");
+
+$$.safeErrorHandling = function(callback){
         if(callback){
             return callback;
         } else{
             return defaultErrorHandlingImplementation;
         }
-    },
-    __intern:{
+    };
+
+$$.__intern = {
         mkArgs:function(args,pos){
             var argsArray = [];
             for(var i = pos; i < args.length; i++){
@@ -64,28 +71,33 @@ global.$$ = {
             }
             return argsArray;
         }
-    },
-    __global:{
+    };
 
-    }
-};
+$$.__global = {
+
+    };
+
 
 /*
- requireModule and requireLibrary are overwriting the node.js defaults in loading modules for increasing security and speed.
+ require and requireLibrary are overwriting the node.js defaults in loading modules for increasing security and speed.
  We guarantee that each module or library is loaded only once and only from a single folder... Use the standard require if you need something else!
 
  By default we expect to run from a privatesky VM engine ( a privatesky node) and therefore the callflow stays in the modules folder there.
- Any new use of callflow (and requireModule or requireLibrary) could require changes to $$.__global.__loadLibrayRoot and $$.__global.__loadModulesRoot
+ Any new use of callflow (and require or requireLibrary) could require changes to $$.__global.__loadLibrayRoot and $$.__global.__loadModulesRoot
  */
 $$.__global.__loadLibraryRoot    = __dirname + "/../../libraries/";
 $$.__global.__loadModulesRoot   = __dirname + "/../../modules/";
 var loadedModules = {};
-$$.requireModule = function(name){
+$$.require = function(name){
 	var existingModule = loadedModules[name];
+
 	if(!existingModule){
-		var absolutePath = path.resolve( $$.__global.__loadModulesRoot + name);
-		existingModule = require(absolutePath);
-		loadedModules[name] = existingModule;
+        existingModule = $$.__runtimeModules[name];
+        if(!existingModule){
+            var absolutePath = path.resolve( $$.__global.__loadModulesRoot + name);
+            existingModule = require(absolutePath);
+            loadedModules[name] = existingModule;
+        }
 	}
 	return existingModule;
 };
@@ -110,7 +122,7 @@ $$.contract         = $$.contracts;
 
 
 
-$$.PSK_PubSub = $$.requireModule("soundpubsub").soundPubSub;
+$$.PSK_PubSub = $$.require("soundpubsub").soundPubSub;
 
 $$.securityContext = "system";
 $$.libraryPrefix = "global";
