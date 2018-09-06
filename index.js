@@ -1,5 +1,5 @@
 
-var path = require("path");
+//var path = require("path");
 
 function defaultErrorHandlingImplementation(err, res){
 	//console.log(err.stack);
@@ -78,6 +78,13 @@ $$.__global = {
     };
 
 
+$$.__global.originalRequire = require;
+
+if(typeof($$.__runtimeModules) == "undefined") {
+    $$.__runtimeModules = {};
+}
+
+
 /*
  require and requireLibrary are overwriting the node.js defaults in loading modules for increasing security and speed.
  We guarantee that each module or library is loaded only once and only from a single folder... Use the standard require if you need something else!
@@ -85,8 +92,9 @@ $$.__global = {
  By default we expect to run from a privatesky VM engine ( a privatesky node) and therefore the callflow stays in the modules folder there.
  Any new use of callflow (and require or requireLibrary) could require changes to $$.__global.__loadLibrayRoot and $$.__global.__loadModulesRoot
  */
-$$.__global.__loadLibraryRoot    = __dirname + "/../../libraries/";
-$$.__global.__loadModulesRoot   = __dirname + "/../../modules/";
+//$$.__global.__loadLibraryRoot    = __dirname + "/../../libraries/";
+//$$.__global.__loadModulesRoot   = __dirname + "/../../modules/";
+
 var loadedModules = {};
 $$.require = function(name){
 	var existingModule = loadedModules[name];
@@ -94,8 +102,8 @@ $$.require = function(name){
 	if(!existingModule){
         existingModule = $$.__runtimeModules[name];
         if(!existingModule){
-            var absolutePath = path.resolve( $$.__global.__loadModulesRoot + name);
-            existingModule = require(absolutePath);
+            //var absolutePath = path.resolve( $$.__global.__loadModulesRoot + name);
+            existingModule = $$.__global.originalRequire(name);
             loadedModules[name] = existingModule;
         }
 	}
@@ -118,10 +126,6 @@ $$.contracts        = callflowModule.createSwarmEngine("contract", swarmUtils);
 $$.contract         = $$.contracts;
 
 
-
-
-
-
 $$.PSK_PubSub = $$.require("soundpubsub").soundPubSub;
 
 $$.securityContext = "system";
@@ -137,8 +141,8 @@ $$.libraries = {
 $$.loadLibrary = require("./lib/loadLibrary").loadLibrary;
 
 $$.requireLibrary = function(name){
-    var absolutePath = path.resolve(  $$.__global.__loadLibraryRoot + name);
-    return $$.loadLibrary(name,absolutePath);
+    //var absolutePath = path.resolve(  $$.__global.__loadLibraryRoot + name);
+    return $$.loadLibrary(name,name);
 };
 
 $$.registerSwarmDescription =  function(libraryName,shortName, description){
