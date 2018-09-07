@@ -8,10 +8,6 @@ function defaultErrorHandlingImplementation(err, res){
 }
 
 
-if(typeof(global.$$) == "undefined") {
-    global.$$ = {};
-}
-
 $$.errorHandler = {
         error:function(err, args, msg){
             console.log(err, "Unknown error from function call with arguments:", args, "Message:", msg);
@@ -73,42 +69,7 @@ $$.__intern = {
         }
     };
 
-$$.__global = {
-
-    };
-
-
-$$.__global.originalRequire = require;
-
-if(typeof($$.__runtimeModules) == "undefined") {
-    $$.__runtimeModules = {};
-}
-
-
-/*
- require and requireLibrary are overwriting the node.js defaults in loading modules for increasing security and speed.
- We guarantee that each module or library is loaded only once and only from a single folder... Use the standard require if you need something else!
-
- By default we expect to run from a privatesky VM engine ( a privatesky node) and therefore the callflow stays in the modules folder there.
- Any new use of callflow (and require or requireLibrary) could require changes to $$.__global.__loadLibrayRoot and $$.__global.__loadModulesRoot
- */
-//$$.__global.__loadLibraryRoot    = __dirname + "/../../libraries/";
-//$$.__global.__loadModulesRoot   = __dirname + "/../../modules/";
-
-var loadedModules = {};
-$$.require = function(name){
-	var existingModule = loadedModules[name];
-
-	if(!existingModule){
-        existingModule = $$.__runtimeModules[name];
-        if(!existingModule){
-            //var absolutePath = path.resolve( $$.__global.__loadModulesRoot + name);
-            existingModule = $$.__global.originalRequire(name);
-            loadedModules[name] = existingModule;
-        }
-	}
-	return existingModule;
-};
+require("./lib/overwriteRequire");
 
 var swarmUtils = require("./lib/choreographies/utilityFunctions/swarm");
 
@@ -126,7 +87,7 @@ $$.contracts        = callflowModule.createSwarmEngine("contract", swarmUtils);
 $$.contract         = $$.contracts;
 
 
-$$.PSK_PubSub = $$.require("soundpubsub").soundPubSub;
+$$.PSK_PubSub = require("soundpubsub").soundPubSub;
 
 $$.securityContext = "system";
 $$.libraryPrefix = "global";
@@ -140,7 +101,7 @@ $$.libraries = {
 
 $$.loadLibrary = require("./lib/loadLibrary").loadLibrary;
 
-$$.requireLibrary = function(name){
+requireLibrary = function(name){
     //var absolutePath = path.resolve(  $$.__global.__loadLibraryRoot + name);
     return $$.loadLibrary(name,name);
 };
