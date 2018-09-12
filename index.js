@@ -9,12 +9,6 @@ function defaultErrorHandlingImplementation(err, res){
 
 require("./lib/overwriteRequire");
 
-if(typeof($$.log) == "undefined") {
-    $$.log = function(args...){
-        console.log(args.join(" "));
-    }
-}
-
 
 
 $$.errorHandler = {
