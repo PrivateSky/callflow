@@ -7,6 +7,15 @@ function defaultErrorHandlingImplementation(err, res){
 	return res;
 }
 
+require("./lib/overwriteRequire");
+
+if(typeof($$.log) == "undefined") {
+    $$.log = function(args...){
+        console.log(args.join(" "));
+    }
+}
+
+
 
 $$.errorHandler = {
         error:function(err, args, msg){
@@ -69,7 +78,7 @@ $$.__intern = {
         }
     };
 
-require("./lib/overwriteRequire");
+
 
 var swarmUtils = require("./lib/choreographies/utilityFunctions/swarm");
 
