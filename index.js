@@ -114,6 +114,8 @@ $$.registerSwarmDescription =  function(libraryName,shortName, description){
         $$.libraries[libraryName] = {};
     }
     $$.libraries[libraryName][shortName] = description;
+    $$.__global.requireLibraries[shortName] = libraryName + "." + shortName;
+
 }
 
 module.exports = {
