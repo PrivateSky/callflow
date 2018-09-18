@@ -109,14 +109,6 @@ requireLibrary = function(name){
     return $$.loadLibrary(name,name);
 };
 
-$$.registerSwarmDescription =  function(libraryName,shortName, description){
-    if(!$$.libraries[libraryName]){
-        $$.libraries[libraryName] = {};
-    }
-    $$.libraries[libraryName][shortName] = description;
-    $$.__global.requireLibraries[shortName] = libraryName + "." + shortName;
-
-}
 
 module.exports = {
     				createSwarmEngine: require("./lib/swarmDescription").createSwarmEngine,
