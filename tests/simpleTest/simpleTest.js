@@ -1,5 +1,5 @@
 require("../../index.js");
-var simpleFlow = $$.callflow.create("simpleFlowTest",{
+var simpleFlow = $$.callflow.describe("simpleFlowTest",{
     start:function(end){
         this.end = end;
         console.log("In 'start'");
@@ -15,6 +15,6 @@ var simpleFlow = $$.callflow.create("simpleFlowTest",{
     }
 });
 
-simpleFlow.start(function(){
+simpleflow.describe(function(){
     console.log("Callback called")
 });

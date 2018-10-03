@@ -9,7 +9,7 @@ var requiredDependencies = {
     }
 }
 
-var myFlow = $$.callflow.create("flowTest",{
+var myFlow = $$.callflow.describe("flowTest",{
 
     start:function(end){
         this.end = end;
@@ -104,6 +104,6 @@ var myFlow = $$.callflow.create("flowTest",{
     }
 });
 
-myFlow.start(function(){
+myflow.describe(function(){
     console.log("Open your browser at http://localhost:"+ port+"/simpleTest.html and check the console");
 });
