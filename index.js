@@ -108,11 +108,23 @@ requireLibrary = function(name){
     return $$.loadLibrary(name,name);
 };
 
+require("./constants");
 
 module.exports = {
     				createSwarmEngine: require("./lib/swarmDescription").createSwarmEngine,
                     createJoinPoint: require("./lib/parallelJoinPoint").createJoinPoint,
                     createSerialJoinPoint: require("./lib/serialJoinPoint").createSerialJoinPoint,
 					"safe-uuid": require("./lib/safe-uuid"),
-                    swarmInstanceManager: require("./lib/choreographies/swarmInstancesManager")
+                    swarmInstanceManager: require("./lib/choreographies/swarmInstancesManager"),
+                    enableInternalSwarmRouting: function(){
+                        function dummyVM(name){
+                            function solveSwarm(swarm){
+                                $$.swarmsInstancesManager.revive_swarm(swarm);
+                            }
+
+                            $$.PSK_PubSub.subscribe(name, solveSwarm);
+                            console.log("Creating a fake execution context...");
+                        }
+                        dummyVM($$.CONSTANTS.SWARM_FOR_EXECUTION);
+                    }
 				};
