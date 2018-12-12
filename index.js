@@ -87,6 +87,10 @@ $$.swarms           = callflowModule.createSwarmEngine("swarm", swarmUtils);
 $$.swarm            = $$.swarms;
 $$.contracts        = callflowModule.createSwarmEngine("contract", swarmUtils);
 $$.contract         = $$.contracts;
+$$.assets           = callflowModule.createSwarmEngine("asset", swarmUtils);
+$$.asset            = $$.assets;
+$$.transactions     = callflowModule.createSwarmEngine("transaction", swarmUtils);
+$$.transaction      = $$.transactions;
 
 
 $$.PSK_PubSub = require("soundpubsub").soundPubSub;
