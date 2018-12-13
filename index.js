@@ -51,7 +51,7 @@ $$.errorHandler = {
         }
     };
 
-$$.uidGenerator = require("./lib/safe-uuid");
+
 
 $$.safeErrorHandling = function(callback){
         if(callback){
@@ -118,7 +118,6 @@ module.exports = {
     				createSwarmEngine: require("./lib/swarmDescription").createSwarmEngine,
                     createJoinPoint: require("./lib/parallelJoinPoint").createJoinPoint,
                     createSerialJoinPoint: require("./lib/serialJoinPoint").createSerialJoinPoint,
-					"safe-uuid": require("./lib/safe-uuid"),
                     swarmInstanceManager: require("./lib/choreographies/swarmInstancesManager"),
                     enableInternalSwarmRouting: function(){
                         function dummyVM(name){
