@@ -103,6 +103,7 @@ $$.libraries = {
     }
 };
 
+$$.interceptor = require("./lib/InterceptorRegistry").createInterceptorRegistry();
 
 $$.loadLibrary = require("./lib/loadLibrary").loadLibrary;
 

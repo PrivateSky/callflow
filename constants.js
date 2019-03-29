@@ -4,6 +4,8 @@ $$.CONSTANTS = {
     OUTBOUND:"outbound",
     PDS:"PrivateDataSystem",
     CRL:"CommunicationReplicationLayer",
-    SWARM_RETURN: 'swarm_return'
+    SWARM_RETURN: 'swarm_return',
+    BEFORE_INTERCEPTOR: 'before',
+    AFTER_INTERCEPTOR: 'after',
 };
 
