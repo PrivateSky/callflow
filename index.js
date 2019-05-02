@@ -7,7 +7,8 @@ function defaultErrorHandlingImplementation(err, res){
 }
 
 require("./lib/overwriteRequire");
-
+const PSKBuffer = require('pskbuffer');
+$$.PSKBuffer = PSKBuffer;
 
 
 $$.errorHandler = {
