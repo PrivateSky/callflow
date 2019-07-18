@@ -6,19 +6,25 @@ $$.registerGlobalSymbol = function(newSymbol, value){
     }
 }
 
-$$.registerGlobalSymbol("handle", function(err){
+$$.registerGlobalSymbol("autoThrow", function(err){
     if(!err){
         throw err;
     }
 })
 
-$$.registerGlobalSymbol("throw", function(message){
+$$.registerGlobalSymbol("ignoreError", function(err){
+    if(err){
+        $$.error(err);
+    }
+})
+
+$$.registerGlobalSymbol("exception", function(message, type){
     if(!err){
         throw new Error(message);
     }
 })
 
-$$.registerGlobalSymbol("error", function(...args){
+$$.registerGlobalSymbol("err", function(...args){
     console.error(...args);
 })
 
@@ -26,14 +32,25 @@ $$.registerGlobalSymbol("warn", function(...args){
     console.warn(...args);
 })
 
+/* a feature is planned but not implemented (during development) but
+also it could remain in production and should be flagged asap*/
+$$.registerGlobalSymbol("incomplete", function(...args){
+    console.warn(...args);
+})
+
+/* used during development and when trying to discover elusive errors*/
 $$.registerGlobalSymbol("assert", function(value, explainWhy){
     if(!value){
         throw new Error("Assert false " + explainWhy);
     }
 })
 
+/* enable/disabale flags that control psk behaviour*/
+$$.registerGlobalSymbol("flags", function(flagName, value){
+    $$.incomplete("flag handling not implemented");
+})
+
 $$.registerGlobalSymbol("obsolete", function(...args){
-    console.log("OBSOLETE needs to be removed!")
     console.log(...args);
 })
 
@@ -41,16 +58,22 @@ $$.registerGlobalSymbol("log", function(...args){
     console.log(...args);
 })
 
-$$.log("Does this exists?");
-
 $$.registerGlobalSymbol("syntaxError", function(...args){
     console.log(...args);
 })
 
+/* log unknown exceptions*/
+$$.registerGlobalSymbol("unknownException", function(...args){
+    console.log(...args);
+})
+
+/* PrivateSky event, used by monitoring and statistics*/
+$$.registerGlobalSymbol("event", function(...args){
+    console.log(...args);
+})
+
+/* log throttling event // it is just an event?*/
 $$.registerGlobalSymbol("throttlingEvent", function(...args){
     console.log(...args);
 })
 
-$$.registerGlobalSymbol("unknownException", function(...args){
-    console.log(...args);
-})
