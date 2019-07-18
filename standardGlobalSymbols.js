@@ -1,6 +1,9 @@
 $$.registerGlobalSymbol = function(newSymbol, value){
     if(typeof $$[newSymbol] == "undefined"){
-        $$[newSymbol] = value;
+        Object.defineProperty($$, newSymbol, {
+            value: value,
+            writable: false
+        });
     } else{
         console.error("Refusing to overwrite $$." + newSymbol);
     }
@@ -47,7 +50,7 @@ $$.registerGlobalSymbol("assert", function(value, explainWhy){
 
 /* enable/disabale flags that control psk behaviour*/
 $$.registerGlobalSymbol("flags", function(flagName, value){
-    $$.incomplete("flag handling not implemented");
+    $$.incomplete("flags handling not implemented");
 })
 
 $$.registerGlobalSymbol("obsolete", function(...args){
