@@ -119,9 +119,8 @@ requireLibrary = function(name){
 };
 
 require("./constants");
-$$.loadLibrary("utils",require("./lib/utils"));
 
-//TODO: SHOULD be moved in $$.__globals
+/*//TODO: SHOULD be moved in $$.__globals
 $$.ensureFolderExists = function (folder, callback) {
     const flow = $$.flow.start("utils.mkDirRec");
     flow.make(folder, callback);
@@ -130,7 +129,7 @@ $$.ensureFolderExists = function (folder, callback) {
 $$.ensureLinkExists = function (existingPath, newPath, callback) {
     const flow = $$.flow.start("utils.mkDirRec");
     flow.makeLink(existingPath, newPath, callback);
-};
+};*/
 
 $$.pathNormalize = function (pathToNormalize) {
     const path = require("path");
