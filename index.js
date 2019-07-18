@@ -7,10 +7,12 @@ function defaultErrorHandlingImplementation(err, res){
 }
 
 require("./lib/overwriteRequire");
+/*
 const PSKBuffer = require('pskbuffer');
-$$.PSKBuffer = PSKBuffer;
+$$.PSKBuffer = PSKBuffer; */
 
 
+$$.obsolete("Please remove $$.errorHandler  asap");
 $$.errorHandler = {
         error:function(err, args, msg){
             console.log(err, "Unknown error from function call with arguments:", args, "Message:", msg);
@@ -53,7 +55,7 @@ $$.errorHandler = {
     };
 
 
-
+$$.obsolete("Please remove $$.safeErrorHandling asap");
 $$.safeErrorHandling = function(callback){
         if(callback){
             return callback;
@@ -62,6 +64,9 @@ $$.safeErrorHandling = function(callback){
         }
     };
 
+
+
+$$.obsolete("Please remove $$.__intern asap");
 $$.__intern = {
         mkArgs:function(args,pos){
             var argsArray = [];
