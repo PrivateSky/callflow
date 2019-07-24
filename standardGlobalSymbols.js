@@ -1,82 +1,100 @@
-$$.registerGlobalSymbol = function(newSymbol, value){
-    if(typeof $$[newSymbol] == "undefined"){
+let logger = console;
+
+try {
+    const PskLogger = require('psklogger').PSKLogger;
+    logger = new PskLogger();
+
+    // TODO: remove this once $$ logger is used instead of console
+    require('../psklogger').overwriteConsole();
+
+    console.log('Logger init successful', process.pid);
+} catch (e) {
+    console.warn('Logger not available, using console', e);
+    logger = console;
+}
+
+$$.registerGlobalSymbol = function (newSymbol, value) {
+    if (typeof $$[newSymbol] == "undefined") {
         Object.defineProperty($$, newSymbol, {
             value: value,
             writable: false
         });
-    } else{
-        console.error("Refusing to overwrite $$." + newSymbol);
+    } else {
+        logger.error("Refusing to overwrite $$." + newSymbol);
     }
-}
+};
 
-$$.registerGlobalSymbol("autoThrow", function(err){
-    if(!err){
+$$.registerGlobalSymbol("autoThrow", function (err) {
+    if (!err) {
         throw err;
     }
-})
+});
 
-$$.registerGlobalSymbol("ignoreError", function(err){
-    if(err){
+$$.registerGlobalSymbol("ignoreError", function (err) {
+    if (err) {
         $$.error(err);
     }
-})
+});
 
-$$.registerGlobalSymbol("exception", function(message, type){
-    if(!err){
+$$.registerGlobalSymbol("exception", function (message, type) {
+    if (!err) {
         throw new Error(message);
     }
-})
+});
 
-$$.registerGlobalSymbol("err", function(...args){
-    console.error(...args);
-})
+$$.registerGlobalSymbol("err", function (...args) {
+    logger.error(...args);
+});
 
-$$.registerGlobalSymbol("warn", function(...args){
-    console.warn(...args);
-})
+$$.registerGlobalSymbol("warn", function (...args) {
+    logger.warn(...args);
+});
 
 /* a feature is planned but not implemented (during development) but
 also it could remain in production and should be flagged asap*/
-$$.registerGlobalSymbol("incomplete", function(...args){
-    console.warn(...args);
-})
+$$.registerGlobalSymbol("incomplete", function (...args) {
+    logger.warn(...args);
+});
 
 /* used during development and when trying to discover elusive errors*/
-$$.registerGlobalSymbol("assert", function(value, explainWhy){
-    if(!value){
+$$.registerGlobalSymbol("assert", function (value, explainWhy) {
+    if (!value) {
         throw new Error("Assert false " + explainWhy);
     }
-})
+});
 
 /* enable/disabale flags that control psk behaviour*/
-$$.registerGlobalSymbol("flags", function(flagName, value){
+$$.registerGlobalSymbol("flags", function (flagName, value) {
     $$.incomplete("flags handling not implemented");
-})
+});
 
-$$.registerGlobalSymbol("obsolete", function(...args){
-    console.log(...args);
-})
+$$.registerGlobalSymbol("obsolete", function (...args) {
+    logger.log(...args);
+});
 
-$$.registerGlobalSymbol("log", function(...args){
-    console.log(...args);
-})
+$$.registerGlobalSymbol("log", function (...args) {
+    logger.log(...args);
+});
 
-$$.registerGlobalSymbol("syntaxError", function(...args){
-    console.log(...args);
-})
+$$.registerGlobalSymbol("syntaxError", function (...args) {
+    logger.log(...args);
+});
 
 /* log unknown exceptions*/
-$$.registerGlobalSymbol("unknownException", function(...args){
-    console.log(...args);
-})
+$$.registerGlobalSymbol("unknownException", function (...args) {
+    logger.log(...args);
+});
 
 /* PrivateSky event, used by monitoring and statistics*/
-$$.registerGlobalSymbol("event", function(...args){
-    console.log(...args);
-})
+$$.registerGlobalSymbol("event", function (event, ...args) {
+    if (logger.hasOwnProperty('event')) {
+        logger.event(event, ...args);
+    } else {
+        console.log(event, ...args);
+    }
+});
 
 /* log throttling event // it is just an event?*/
-$$.registerGlobalSymbol("throttlingEvent", function(...args){
-    console.log(...args);
-})
-
+$$.registerGlobalSymbol("throttlingEvent", function (...args) {
+    logger.log(...args);
+});
