@@ -1,16 +1,20 @@
 let logger = console;
 
-try {
-    const PskLogger = require('psklogger').PSKLogger;
-    logger = new PskLogger();
+if (process.env.NO_LOGS !== 'true') {
+    try {
+        const PskLogger = require('psklogger').PSKLogger;
+        logger = new PskLogger();
 
-    // TODO: remove this once $$ logger is used instead of console
-    require('../psklogger').overwriteConsole();
+        // TODO: remove this once $$ logger is used instead of console
+        require('../psklogger').overwriteConsole();
 
-    console.log('Logger init successful', process.pid);
-} catch (e) {
-    console.warn('Logger not available, using console', e);
-    logger = console;
+        console.log('Logger init successful', process.pid);
+    } catch (e) {
+        console.warn('Logger not available, using console', e);
+        logger = console;
+    }
+} else {
+    console.log('Environment flag NO_LOGS is set, logging to console');
 }
 
 $$.registerGlobalSymbol = function (newSymbol, value) {
