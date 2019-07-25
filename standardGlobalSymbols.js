@@ -2,11 +2,13 @@ let logger = console;
 
 if (process.env.NO_LOGS !== 'true') {
     try {
-        const PskLogger = require('psklogger').PSKLogger;
+        const PSKLoggerModule = require('psklogger');
+        const PskLogger = PSKLoggerModule.PSKLogger;
+
         logger = new PskLogger();
 
         // TODO: remove this once $$ logger is used instead of console
-        require('../psklogger').overwriteConsole();
+        PSKLoggerModule.overwriteConsole();
 
         console.log('Logger init successful', process.pid);
     } catch (e) {
