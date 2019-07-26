@@ -138,6 +138,31 @@ $$.pathNormalize = function (pathToNormalize) {
     return pathToNormalize.replace(/[\/\\]/g, path.sep);
 };
 
+// add interceptors
+
+const crypto = require('crypto');
+
+$$.interceptor.register('*', '*', 'before', function () {
+    const swarmTypeName = this.getMetadata('swarmTypeName');
+    const phaseName = this.getMetadata('phaseName');
+    const swarmId = this.getMetadata('swarmId');
+    const executionId = crypto.randomBytes(16).toString('hex');
+
+    this.setMetadata('executionId', executionId);
+
+    $$.event('swarm.call.before', {swarmTypeName, phaseName, executionId});
+});
+
+$$.interceptor.register('*', '*', 'after', function () {
+    const swarmTypeName = this.getMetadata('swarmTypeName');
+    const phaseName = this.getMetadata('phaseName');
+    const executionId = this.getMetadata('executionId');
+
+    this.setMetadata('executionId', undefined);
+
+    $$.event('swarm.call.time', {swarmTypeName, phaseName, executionId});
+});
+
 module.exports = {
     				createSwarmEngine: require("./lib/swarmDescription").createSwarmEngine,
                     createJoinPoint: require("./lib/parallelJoinPoint").createJoinPoint,
