@@ -3,10 +3,10 @@ let logger = console;
 if (process.env.NO_LOGS !== 'true') {
     try {
         const PSKLoggerModule = require('psklogger');
-        const PskLogger = PSKLoggerModule.PSKLogger;
-
-        logger = new PskLogger();
-
+        const PSKLogger = PSKLoggerModule.PSKLogger;
+        
+        logger = PSKLogger.getLogger();
+        
         // TODO: remove this once $$ logger is used instead of console
         PSKLoggerModule.overwriteConsole();
 
@@ -98,6 +98,11 @@ $$.registerGlobalSymbol("event", function (event, ...args) {
     } else {
         console.log(event, ...args);
     }
+});
+
+/* */
+$$.registerGlobalSymbol("redirectLog", function(logType, logObject) {
+    logger.redirect(logType, logObject);
 });
 
 /* log throttling event // it is just an event?*/
