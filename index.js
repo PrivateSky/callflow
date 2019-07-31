@@ -79,8 +79,10 @@ $$.__intern = {
 
 
 
-var swarmUtils = require("./lib/choreographies/utilityFunctions/swarm");
-var assetUtils = require("./lib/choreographies/utilityFunctions/asset");
+var swarmUtils = require("./lib/choreographies/swarm");
+var assetUtils = require("./lib/utilityFunctions/asset");
+
+var transactionUtils = require("./lib/utilityFunctions/transaction");
 $$.defaultErrorHandlingImplementation = defaultErrorHandlingImplementation;
 
 var callflowModule = require("./lib/swarmDescription");
@@ -95,7 +97,7 @@ $$.contracts        = callflowModule.createSwarmEngine("contract", swarmUtils);
 $$.contract         = $$.contracts;
 $$.assets           = callflowModule.createSwarmEngine("asset", assetUtils);
 $$.asset            = $$.assets;
-$$.transactions     = callflowModule.createSwarmEngine("transaction", swarmUtils);
+$$.transactions     = callflowModule.createSwarmEngine("transaction", transactionUtils);
 $$.transaction      = $$.transactions;
 
 
