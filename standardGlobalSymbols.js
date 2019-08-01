@@ -48,13 +48,6 @@ $$.registerGlobalSymbol("exception", function (message, type) {
     }
 });
 
-$$.registerGlobalSymbol("err", function (...args) {
-    logger.error(...args);
-});
-
-$$.registerGlobalSymbol("warn", function (...args) {
-    logger.warn(...args);
-});
 
 /* a feature is planned but not implemented (during development) but
 also it could remain in production and should be flagged asap*/
@@ -75,19 +68,39 @@ $$.registerGlobalSymbol("flags", function (flagName, value) {
 });
 
 $$.registerGlobalSymbol("obsolete", function (...args) {
+    args.unshift("Obsolete:");
     logger.log(...args);
 });
 
 $$.registerGlobalSymbol("log", function (...args) {
+    args.unshift("Log:");
     logger.log(...args);
 });
 
+$$.registerGlobalSymbol("info", function (...args) {
+    args.unshift("Info:");
+    logger.log(...args);
+});
+
+
+$$.registerGlobalSymbol("err", function (...args) {
+    args.unshift("Error:");
+    logger.error(...args);
+});
+
+$$.registerGlobalSymbol("warn", function (...args) {
+    args.unshift("Warn:");
+    logger.warn(...args);
+});
+
 $$.registerGlobalSymbol("syntaxError", function (...args) {
+    args.unshift("syntaxError:");
     logger.log(...args);
 });
 
 /* log unknown exceptions*/
 $$.registerGlobalSymbol("unknownException", function (...args) {
+    args.unshift("unknownException:");
     logger.log(...args);
 });
 
