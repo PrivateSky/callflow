@@ -43,15 +43,17 @@ $$.registerGlobalSymbol("ignoreError", function (err) {
 });
 
 $$.registerGlobalSymbol("exception", function (message, type) {
-    if (!err) {
         throw new Error(message);
-    }
 });
 
+$$.registerGlobalSymbol("throw", function (message, type) {
+        throw new Error(message);
+});
 
 /* a feature is planned but not implemented (during development) but
 also it could remain in production and should be flagged asap*/
 $$.registerGlobalSymbol("incomplete", function (...args) {
+    args.unshift("Incomplete feature touched:");
     logger.warn(...args);
 });
 
@@ -68,7 +70,7 @@ $$.registerGlobalSymbol("flags", function (flagName, value) {
 });
 
 $$.registerGlobalSymbol("obsolete", function (...args) {
-    args.unshift("Obsolete:");
+    args.unshift("Obsolete feature:");
     logger.log(...args);
 });
 
