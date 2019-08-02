@@ -36,11 +36,18 @@ $$.registerGlobalSymbol("autoThrow", function (err) {
     }
 });
 
+$$.registerGlobalSymbol("checkError", function (err,callback) {
+    if (err) {
+        callback(err);
+    }
+});
+
 $$.registerGlobalSymbol("ignoreError", function (err) {
     if (err) {
         $$.error(err);
     }
 });
+
 
 $$.registerGlobalSymbol("exception", function (message, type) {
         throw new Error(message);
