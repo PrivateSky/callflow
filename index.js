@@ -11,50 +11,7 @@ require("./lib/overwriteRequire");
 const PSKBuffer = require('pskbuffer');
 $$.PSKBuffer = PSKBuffer; */
 
-
-$$.obsolete("Please remove $$.errorHandler  asap");
-$$.errorHandler = {
-        error:function(err, args, msg){
-            console.log(err, "Unknown error from function call with arguments:", args, "Message:", msg);
-        },
-        throwError:function(err, args, msg){
-            console.log(err, "Unknown error from function call with arguments:", args, "Message:", msg);
-            throw err;
-        },
-        ignorePossibleError: function(name){
-            console.log(name);
-        },
-        syntaxError:function(property, swarm, text){
-            //throw new Error("Misspelled member name or other internal error!");
-            var swarmName;
-            try{
-                if(typeof swarm == "string"){
-                    swarmName = swarm;
-                } else
-                if(swarm && swarm.meta){
-                    swarmName  = swarm.meta.swarmTypeName;
-                } else {
-                    swarmName = swarm.getInnerValue().meta.swarmTypeName;
-                }
-            } catch(err){
-                swarmName = err.toString();
-            }
-            if(property){
-                console.log("Wrong member name ", property,  " in swarm ", swarmName);
-                if(text) {
-                    console.log(text);
-                }
-            } else {
-                console.log("Unknown swarm", swarmName);
-            }
-
-        },
-        warning:function(msg){
-            console.log(msg);
-        }
-    };
-
-
+/*
 $$.obsolete("Please remove $$.safeErrorHandling asap");
 $$.safeErrorHandling = function(callback){
         if(callback){
@@ -63,7 +20,7 @@ $$.safeErrorHandling = function(callback){
             return defaultErrorHandlingImplementation;
         }
     };
-
+*/
 
 
 $$.obsolete("Please remove $$.__intern asap");

@@ -36,15 +36,17 @@ $$.registerGlobalSymbol("autoThrow", function (err) {
     }
 });
 
-$$.registerGlobalSymbol("checkError", function (err,callback) {
+$$.registerGlobalSymbol("propagateError", function (err,callback) {
     if (err) {
         callback(err);
+        throw err; //stop execution
     }
 });
 
-$$.registerGlobalSymbol("ignoreError", function (err) {
+$$.registerGlobalSymbol("logError", function (err) {
     if (err) {
-        $$.error(err);
+        console.log(err);
+        $$.err(err);
     }
 });
 
@@ -79,32 +81,53 @@ $$.registerGlobalSymbol("flags", function (flagName, value) {
 $$.registerGlobalSymbol("obsolete", function (...args) {
     args.unshift("Obsolete feature:");
     logger.log(...args);
+    console.log(...args);
 });
 
 $$.registerGlobalSymbol("log", function (...args) {
     args.unshift("Log:");
     logger.log(...args);
+    console.log(...args);
 });
 
 $$.registerGlobalSymbol("info", function (...args) {
     args.unshift("Info:");
     logger.log(...args);
+    console.log(...args);
 });
 
 
 $$.registerGlobalSymbol("err", function (...args) {
     args.unshift("Error:");
     logger.error(...args);
+    console.log(...args);
 });
 
 $$.registerGlobalSymbol("warn", function (...args) {
     args.unshift("Warn:");
     logger.warn(...args);
+    console.log(...args);
 });
 
 $$.registerGlobalSymbol("syntaxError", function (...args) {
-    args.unshift("syntaxError:");
+    args.unshift("Unknown syntaxError:");
     logger.log(...args);
+});
+
+$$.invalidMemberName = function (name, swarm) {
+    var swarmName = "unknown"
+    if(swarm && swarm.meta){
+        swarmName = swarm.meta.swarmTypeName;
+    }
+    var text = "Invalid member name " + name + "in swarm " + swarmName;
+    console.log(text);
+    logger.log(text);
+};
+
+$$.registerGlobalSymbol("invalidSwarmName", function ( swarmName) {
+    var text = "Invalid swarm name " + swarmName;
+    console.log(text);
+    logger.log(text);
 });
 
 /* log unknown exceptions*/
