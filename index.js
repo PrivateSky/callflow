@@ -11,19 +11,7 @@ require("./lib/overwriteRequire");
 const PSKBuffer = require('pskbuffer');
 $$.PSKBuffer = PSKBuffer; */
 
-/*
-$$.obsolete("Please remove $$.safeErrorHandling asap");
-$$.safeErrorHandling = function(callback){
-        if(callback){
-            return callback;
-        } else{
-            return defaultErrorHandlingImplementation;
-        }
-    };
-*/
 
-
-$$.obsolete("Please remove $$.__intern asap");
 $$.__intern = {
         mkArgs:function(args,pos){
             var argsArray = [];

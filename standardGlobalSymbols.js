@@ -50,6 +50,10 @@ $$.registerGlobalSymbol("logError", function (err) {
     }
 });
 
+console.log("Fix the fixMe to not display on console but put in logs");
+$$.registerGlobalSymbol("fixMe", function (...args) {
+        //$$.log(...args);
+});
 
 $$.registerGlobalSymbol("exception", function (message, type) {
         throw new Error(message);
