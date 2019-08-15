@@ -25,9 +25,9 @@ $$.__intern = {
 
 
 var swarmUtils = require("./lib/choreographies/swarm");
-var assetUtils = require("./lib/utilityFunctions/asset");
 
-var transactionUtils = require("./lib/utilityFunctions/transaction");
+
+
 $$.defaultErrorHandlingImplementation = defaultErrorHandlingImplementation;
 
 var callflowModule = require("./lib/swarmDescription");
@@ -40,10 +40,17 @@ $$.swarms           = callflowModule.createSwarmEngine("swarm", swarmUtils);
 $$.swarm            = $$.swarms;
 $$.contracts        = callflowModule.createSwarmEngine("contract", swarmUtils);
 $$.contract         = $$.contracts;
-$$.assets           = callflowModule.createSwarmEngine("asset", assetUtils);
-$$.asset            = $$.assets;
-$$.transactions     = callflowModule.createSwarmEngine("transaction", transactionUtils);
-$$.transaction      = $$.transactions;
+
+if($$.__obsolete_assets_transaction_defined_in_callflow){
+    var assetUtils = require("./lib/utilityFunctions/__osbsolete_asset");
+    var transactionUtils = require("./lib/utilityFunctions/__obsolete_transaction");
+    $$.assets           = callflowModule.createSwarmEngine("asset", assetUtils);
+    $$.asset            = $$.assets;
+    $$.transactions     = callflowModule.createSwarmEngine("transaction", transactionUtils);
+    $$.transaction      = $$.transactions;
+}
+
+
 
 
 $$.PSK_PubSub = require("soundpubsub").soundPubSub;
@@ -125,5 +132,6 @@ module.exports = {
                             console.log("Creating a fake execution context...");
                         }
                         dummyVM($$.CONSTANTS.SWARM_FOR_EXECUTION);
-                    }
+                    },
+                    createStandardAPIsForSwarms:require("./lib/utilityFunctions/base").createForObject
 				};
