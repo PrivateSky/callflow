@@ -63,12 +63,14 @@ $$.registerGlobalSymbol("throw", function (message, type) {
         throw new Error(message);
 });
 
-/* a feature is planned but not implemented (during development) but
+/* signal a  planned feature but not implemented yet (during development) but
 also it could remain in production and should be flagged asap*/
-$$.registerGlobalSymbol("incomplete", function (...args) {
+$$.incomplete = function (...args) {
     args.unshift("Incomplete feature touched:");
     logger.warn(...args);
-});
+};
+
+$$.notImplemented = $$.incomplete;
 
 /* used during development and when trying to discover elusive errors*/
 $$.registerGlobalSymbol("assert", function (value, explainWhy) {
