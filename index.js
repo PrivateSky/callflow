@@ -41,7 +41,8 @@ $$.swarm            = $$.swarms;
 $$.contracts        = callflowModule.createSwarmEngine("contract", swarmUtils);
 $$.contract         = $$.contracts;
 
-if($$.__obsolete_assets_transaction_defined_in_callflow){
+
+function enableObsoleteAssetsAndTransactions(){
     var assetUtils = require("./lib/utilityFunctions/__osbsolete_asset");
     var transactionUtils = require("./lib/utilityFunctions/__obsolete_transaction");
     $$.assets           = callflowModule.createSwarmEngine("asset", assetUtils);
@@ -49,8 +50,6 @@ if($$.__obsolete_assets_transaction_defined_in_callflow){
     $$.transactions     = callflowModule.createSwarmEngine("transaction", transactionUtils);
     $$.transaction      = $$.transactions;
 }
-
-
 
 
 $$.PSK_PubSub = require("soundpubsub").soundPubSub;
@@ -133,5 +132,6 @@ module.exports = {
                         }
                         dummyVM($$.CONSTANTS.SWARM_FOR_EXECUTION);
                     },
-                    createStandardAPIsForSwarms:require("./lib/utilityFunctions/base").createForObject
+                    createStandardAPIsForSwarms:require("./lib/utilityFunctions/base").createForObject,
+                    enableObsoleteAssetsAndTransactions:enableObsoleteAssetsAndTransactions
 				};
