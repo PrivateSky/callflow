@@ -184,7 +184,18 @@ $$.registerGlobalSymbol("info", function (...args) {
 $$.registerGlobalSymbol("err", function (...args) {
     args.unshift("Error:");
     logger.error(...args);
-    console.log(...args);
+    console.error(...args);
+});
+
+/**
+ * @method - Uses the logger to log a message of level "error"
+ * @name $$#err
+ * @param {...*} args
+ */
+$$.registerGlobalSymbol("error", function (...args) {
+    args.unshift("Error:");
+    logger.error(...args);
+    console.error(...args);
 });
 
 /**
@@ -205,7 +216,8 @@ $$.registerGlobalSymbol("warn", function (...args) {
  */
 $$.registerGlobalSymbol("syntaxError", function (...args) {
     args.unshift("Unknown syntaxError:");
-    logger.log(...args);
+    logger.err(...args);
+    console.error(...args);
 });
 
 /**
@@ -220,8 +232,8 @@ $$.invalidMemberName = function (name, swarm) {
         swarmName = swarm.meta.swarmTypeName;
     }
     const text = "Invalid member name " + name + "in swarm " + swarmName;
-    console.log(text);
-    logger.log(text);
+    console.error(text);
+    logger.err(text);
 };
 
 /**
@@ -232,8 +244,8 @@ $$.invalidMemberName = function (name, swarm) {
  */
 $$.registerGlobalSymbol("invalidSwarmName", function (swarmName) {
     const text = "Invalid swarm name " + swarmName;
-    console.log(text);
-    logger.log(text);
+    console.error(text);
+    logger.err(text);
 });
 
 /**
@@ -243,7 +255,8 @@ $$.registerGlobalSymbol("invalidSwarmName", function (swarmName) {
  */
 $$.registerGlobalSymbol("unknownException", function (...args) {
     args.unshift("unknownException:");
-    logger.log(...args);
+    logger.err(...args);
+    console.error(...args);
 });
 
 /**
