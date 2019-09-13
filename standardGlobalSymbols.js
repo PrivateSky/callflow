@@ -12,7 +12,7 @@ if (process.env.NO_LOGS !== 'true') {
 
         console.log('Logger init successful', process.pid);
     } catch (e) {
-        console.warn('Logger not available, using console');
+        console.log('Logger not available, using console');
         logger = console;
     }
 } else {
@@ -28,6 +28,10 @@ $$.registerGlobalSymbol = function (newSymbol, value) {
     } else {
         logger.error("Refusing to overwrite $$." + newSymbol);
     }
+};
+
+console.warn = (...args)=>{
+    console.log(...args);
 };
 
 /**
@@ -216,7 +220,7 @@ $$.registerGlobalSymbol("warn", function (...args) {
  */
 $$.registerGlobalSymbol("syntaxError", function (...args) {
     args.unshift("Unknown syntaxError:");
-    logger.err(...args);
+    logger.error(...args);
     console.error(...args);
 });
 
