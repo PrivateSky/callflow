@@ -216,7 +216,7 @@ $$.registerGlobalSymbol("warn", function (...args) {
  */
 $$.registerGlobalSymbol("syntaxError", function (...args) {
     args.unshift("Unknown syntaxError:");
-    logger.err(...args);
+    logger.error(...args);
     console.error(...args);
 });
 
