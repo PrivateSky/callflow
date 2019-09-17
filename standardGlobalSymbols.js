@@ -219,9 +219,15 @@ $$.registerGlobalSymbol("warn", function (...args) {
  * @param {...*} args
  */
 $$.registerGlobalSymbol("syntaxError", function (...args) {
-    args.unshift("Unknown syntaxError:");
+    args.unshift("Syntax error:");
     logger.error(...args);
-    console.error(...args);
+    try{
+        throw new Error("Syntax error or misspelled symbol!");
+    }catch(err){
+        console.error(...args);
+        console.error(err.stack);
+    }
+
 });
 
 /**
