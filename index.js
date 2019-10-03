@@ -103,18 +103,9 @@ $$.interceptor.register('*', '*', 'before', function () {
 
     this.setMetadata('executionId', executionId);
 
-    $$.event('swarm.call.before', {swarmTypeName, phaseName, executionId});
+    $$.event('swarm.call', {swarmTypeName, phaseName, swarmId});
 });
 
-$$.interceptor.register('*', '*', 'after', function () {
-    const swarmTypeName = this.getMetadata('swarmTypeName');
-    const phaseName = this.getMetadata('phaseName');
-    const executionId = this.getMetadata('executionId');
-
-    this.setMetadata('executionId', undefined);
-
-    $$.event('swarm.call.time', {swarmTypeName, phaseName, executionId});
-});
 
 module.exports = {
     				createSwarmEngine: require("./lib/swarmDescription").createSwarmEngine,
