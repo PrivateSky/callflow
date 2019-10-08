@@ -279,7 +279,7 @@ $$.registerGlobalSymbol("event", function (event, ...args) {
     if (logger.hasOwnProperty('event')) {
         logger.event(event, ...args);
     } else {
-        console.log(event, ...args);
+        // console.log(event, ...args);
     }
 });
 
