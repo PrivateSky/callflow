@@ -166,7 +166,6 @@ $$.registerGlobalSymbol("obsolete", function (...args) {
 $$.registerGlobalSymbol("log", function (...args) {
     args.unshift("Log:");
     logger.log(...args);
-    console.log(...args);
 });
 
 /**
@@ -290,7 +289,9 @@ $$.registerGlobalSymbol("event", function (event, ...args) {
  * @param {...*} args
  */
 $$.registerGlobalSymbol("redirectLog", function (logType, logObject) {
-    logger.redirect(logType, logObject);
+    if(logger.hasOwnProperty('redirect')) {
+        logger.redirect(logType, logObject);
+    }
 });
 
 /**
