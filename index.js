@@ -23,11 +23,6 @@ $$.__intern = {
     };
 
 
-
-var swarmUtils = require("./lib/choreographies/swarm");
-
-
-
 $$.defaultErrorHandlingImplementation = defaultErrorHandlingImplementation;
 
 var callflowModule = require("./lib/swarmDescription");
@@ -35,13 +30,6 @@ $$.callflows        = callflowModule.createSwarmEngine("callflow");
 $$.callflow         = $$.callflows;
 $$.flow             = $$.callflows;
 $$.flows            = $$.callflows;
-
-/*
-$$.swarms           = callflowModule.createSwarmEngine("swarm", swarmUtils);
-$$.swarm            = $$.swarms;
-$$.contracts        = callflowModule.createSwarmEngine("contract", swarmUtils);
-$$.contract         = $$.contracts;
-*/
 
 
 $$.PSK_PubSub = require("soundpubsub").soundPubSub;
@@ -93,7 +81,7 @@ module.exports = {
     				createSwarmEngine: require("./lib/swarmDescription").createSwarmEngine,
                     createJoinPoint: require("./lib/parallelJoinPoint").createJoinPoint,
                     createSerialJoinPoint: require("./lib/serialJoinPoint").createSerialJoinPoint,
-                    swarmInstanceManager: require("./lib/choreographies/swarmInstancesManager"),
+                    //swarmInstanceManager: require("./lib/choreographies/swarmInstancesManager"),
                     enableInternalSwarmRouting: function(){
                         function dummyVM(name){
                             function solveSwarm(swarm){
