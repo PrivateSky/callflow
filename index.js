@@ -36,20 +36,12 @@ $$.callflow         = $$.callflows;
 $$.flow             = $$.callflows;
 $$.flows            = $$.callflows;
 
+/*
 $$.swarms           = callflowModule.createSwarmEngine("swarm", swarmUtils);
 $$.swarm            = $$.swarms;
 $$.contracts        = callflowModule.createSwarmEngine("contract", swarmUtils);
 $$.contract         = $$.contracts;
-
-
-function enableObsoleteAssetsAndTransactions(){
-    var assetUtils = require("./lib/utilityFunctions/__osbsolete_asset");
-    var transactionUtils = require("./lib/utilityFunctions/__obsolete_transaction");
-    $$.assets           = callflowModule.createSwarmEngine("asset", assetUtils);
-    $$.asset            = $$.assets;
-    $$.transactions     = callflowModule.createSwarmEngine("transaction", transactionUtils);
-    $$.transaction      = $$.transactions;
-}
+*/
 
 
 $$.PSK_PubSub = require("soundpubsub").soundPubSub;
@@ -73,16 +65,6 @@ requireLibrary = function(name){
 
 require("./constants");
 
-/*//TODO: SHOULD be moved in $$.__globals
-$$.ensureFolderExists = function (folder, callback) {
-    const flow = $$.flow.start("utils.mkDirRec");
-    flow.make(folder, callback);
-};
-
-$$.ensureLinkExists = function (existingPath, newPath, callback) {
-    const flow = $$.flow.start("utils.mkDirRec");
-    flow.makeLink(existingPath, newPath, callback);
-};*/
 
 $$.pathNormalize = function (pathToNormalize) {
     const path = require("path");
@@ -111,7 +93,7 @@ module.exports = {
     				createSwarmEngine: require("./lib/swarmDescription").createSwarmEngine,
                     createJoinPoint: require("./lib/parallelJoinPoint").createJoinPoint,
                     createSerialJoinPoint: require("./lib/serialJoinPoint").createSerialJoinPoint,
-                    swarmInstanceManager: require("./lib/choreographies/swarmInstancesManager"),
+                    /*swarmInstanceManager: require("./lib/choreographies/swarmInstancesManager"),
                     enableInternalSwarmRouting: function(){
                         function dummyVM(name){
                             function solveSwarm(swarm){
@@ -122,7 +104,9 @@ module.exports = {
                             console.log("Creating a fake execution context...");
                         }
                         dummyVM($$.CONSTANTS.SWARM_FOR_EXECUTION);
-                    },
-                    createStandardAPIsForSwarms:require("./lib/utilityFunctions/base").createForObject,
-                    enableObsoleteAssetsAndTransactions:enableObsoleteAssetsAndTransactions
+                    },*/
+                    createStandardAPIsForSwarms:require("./lib/utilityFunctions/base").createForObject
 				};
+
+
+require("../choreo");
