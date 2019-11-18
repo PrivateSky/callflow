@@ -81,18 +81,6 @@ module.exports = {
     				createSwarmEngine: require("./lib/swarmDescription").createSwarmEngine,
                     createJoinPoint: require("./lib/parallelJoinPoint").createJoinPoint,
                     createSerialJoinPoint: require("./lib/serialJoinPoint").createSerialJoinPoint,
-                    //swarmInstanceManager: require("./lib/choreographies/swarmInstancesManager"),
-                    enableInternalSwarmRouting: function(){
-                        function dummyVM(name){
-                            function solveSwarm(swarm){
-                                $$.swarmsInstancesManager.revive_swarm(swarm);
-                            }
-
-                            $$.PSK_PubSub.subscribe(name, solveSwarm);
-                            console.log("Creating a fake execution context...");
-                        }
-                        dummyVM($$.CONSTANTS.SWARM_FOR_EXECUTION);
-                    },
                     createStandardAPIsForSwarms:require("./lib/utilityFunctions/base").createForObject
 				};
 
