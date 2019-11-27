@@ -34,7 +34,8 @@ $$.flows            = $$.callflows;
 
 $$.PSK_PubSub = require("soundpubsub").soundPubSub;
 
-$$.securityContext = "system";
+$$.securityContext = null;
+$$.HRN_securityContext = "unnamedSecurityContext"; /*HRN: Human Readable Name */
 $$.libraryPrefix = "global";
 $$.libraries = {
     global:{
