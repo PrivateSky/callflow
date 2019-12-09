@@ -86,4 +86,5 @@ module.exports = {
 				};
 
 
-require("../choreo");
+/*
+require("../choreo");*/
