@@ -1,6 +1,6 @@
 let logger = console;
 
-if (process.env.NO_LOGS !== 'true') {
+if (!global.process || process.env.NO_LOGS !== 'true') {
     try {
         const PSKLoggerModule = require('psklogger');
         const PSKLogger = PSKLoggerModule.PSKLogger;
