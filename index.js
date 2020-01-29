@@ -1,15 +1,12 @@
+if($$.callflow){
+    throw new Error("Callflow already initialized!");
+}
 
-//var path = require("path");
 function defaultErrorHandlingImplementation(err, res){
 	//console.log(err.stack);
 	if(err) throw err;
 	return res;
 }
-
-/*
-const PSKBuffer = require('pskbuffer');
-$$.PSKBuffer = PSKBuffer; */
-
 
 $$.__intern = {
         mkArgs:function(args,pos){
@@ -20,7 +17,6 @@ $$.__intern = {
             return argsArray;
         }
     };
-
 
 $$.defaultErrorHandlingImplementation = defaultErrorHandlingImplementation;
 
@@ -83,7 +79,3 @@ module.exports = {
                     createSerialJoinPoint: require("./lib/serialJoinPoint").createSerialJoinPoint,
                     createStandardAPIsForSwarms:require("./lib/utilityFunctions/base").createForObject
 				};
-
-
-/*
-require("../choreo");*/
