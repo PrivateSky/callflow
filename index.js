@@ -43,7 +43,7 @@ function initialise() {
 
     $$.loadLibrary = require("./lib/loadLibrary").loadLibrary;
 
-    requireLibrary = function(name){
+    global.requireLibrary = function(name){
         //var absolutePath = path.resolve(  $$.__global.__loadLibraryRoot + name);
         return $$.loadLibrary(name,name);
     };
