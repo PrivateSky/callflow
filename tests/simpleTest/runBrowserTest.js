@@ -89,6 +89,7 @@ var myFlow = $$.callflow.describe("flowTest",{
         }
     },
     deleteFolderRecursive: function(path){
+        const removeDirSync = require("swarmutils").removeDirSync;
         var self = this;
         if (fs.existsSync(path)) {
             fs.readdirSync(path).forEach(function(file, index){
@@ -99,7 +100,7 @@ var myFlow = $$.callflow.describe("flowTest",{
                     fs.unlinkSync(curPath);
                 }
             });
-            fs.rmdirSync(path);
+            removeDirSync(path);
         }
     }
 });
